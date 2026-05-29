@@ -7846,8 +7846,7 @@
       /* ════════════════════════════════
    SAVE / IMPORT JSON
 ════════════════════════════════ */
-      // Construye el objeto serializable del journey actual (reutilizado por
-      // exportación a archivo y por el guardado en la herramienta).
+      // Construye el objeto serializable del journey ACTIVO (una sola pestaña).
       function _buildFlowData() {
         const title = document.getElementById(
           "journey-title-display",
@@ -7863,17 +7862,52 @@
         };
       }
 
+      // Sincroniza el estado del lienzo actual dentro de su pestaña en
+      // `journeys`, para que al serializar todas las pestañas la activa
+      // refleje los últimos cambios (igual que hace switchJourney).
+      function _syncActiveTabState() {
+        if (typeof journeys === "undefined") return;
+        const cur = journeys.find((j) => j.id === activeJourneyId);
+        if (cur) {
+          cur.state = _captureState();
+          cur.title = document.getElementById(
+            "journey-title-display",
+          ).textContent;
+        }
+      }
+
+      // Construye un objeto con TODAS las pestañas abiertas. Este es el
+      // formato nuevo (multi-journey). Conserva cuál estaba activa.
+      function _buildAllJourneysData() {
+        _syncActiveTabState();
+        return {
+          version: 2,
+          type: "journey-workspace",
+          activeJourneyId,
+          journeyCounter,
+          journeys: JSON.parse(JSON.stringify(journeys)),
+          meta: { saved: new Date().toISOString() },
+        };
+      }
+
       function saveFlow() {
-        const data = _buildFlowData();
+        const data = _buildAllJourneysData();
         localStorage.setItem("jb_flow", JSON.stringify(data));
         const a = document.createElement("a");
         a.href =
           "data:application/json," +
           encodeURIComponent(JSON.stringify(data, null, 2));
-        a.download =
-          (data.title || "journey_flow").replace(/\s+/g, "_") + ".json";
+        const baseName =
+          data.journeys.length > 1
+            ? "journeys_" + data.journeys.length + "_pestanas"
+            : (data.journeys[0]?.title || "journey_flow").replace(/\s+/g, "_");
+        a.download = baseName + ".json";
         a.click();
-        showNotif("⬇️ Journey exportado como archivo JSON");
+        showNotif(
+          "⬇️ " +
+            data.journeys.length +
+            " pestaña(s) exportada(s) como archivo JSON",
+        );
       }
 
       /* ════════════════════════════════
@@ -7918,15 +7952,20 @@
       }
 
       function saveToTool() {
-        const data = _buildFlowData();
+        const data = _buildAllJourneysData();
         const history = _loadHistory();
+
+        const totalNodes = data.journeys.reduce(
+          (sum, j) => sum + ((j.state && j.state.nodes) || []).length,
+          0,
+        );
 
         const version = {
           id: "v_" + Date.now(),
           savedAt: new Date().toISOString(),
-          title: data.title,
-          nodeCount: (data.nodes || []).length,
-          connCount: (data.connections || []).length,
+          tabCount: data.journeys.length,
+          titles: data.journeys.map((j) => j.title),
+          nodeCount: totalNodes,
           data: data,
         };
 
@@ -7944,7 +7983,12 @@
 
         clearUnsavedExport();
         _updateSaveMeta(version.savedAt);
-        showNotif("💾 Guardado en la herramienta · versión #" + history.length);
+        showNotif(
+          "💾 Guardado · " +
+            data.journeys.length +
+            " pestaña(s) · versión #" +
+            history.length,
+        );
       }
 
       // Muestra junto al botón cuándo fue el último guardado
@@ -8028,15 +8072,29 @@
             const num = history.length - idx;
             const d = new Date(v.savedAt);
             const isLatest = idx === 0;
+            // Compatibilidad: versiones viejas guardaban una sola pestaña
+            const tabCount =
+              v.tabCount != null
+                ? v.tabCount
+                : v.data && v.data.journeys
+                  ? v.data.journeys.length
+                  : 1;
+            const titles =
+              v.titles ||
+              (v.data && v.data.journeys
+                ? v.data.journeys.map((j) => j.title)
+                : [v.title || "Sin título"]);
+            const titlesStr = titles.join(" · ");
             return `
             <div style="background:#fff;border:1.5px solid ${isLatest ? "#04844b" : "#e2e8f0"};border-radius:8px;padding:11px 13px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
               <div style="flex:1;min-width:0;">
                 <div style="font-size:12px;font-weight:700;color:#1e293b;">
                   Versión #${num}
-                  ${isLatest ? '<span style="background:#dcfce7;color:#04844b;font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:6px;">ACTUAL</span>' : ""}
+                  <span style="background:#e0e7ff;color:#4338ca;font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:6px;">${tabCount} pestaña${tabCount === 1 ? "" : "s"}</span>
+                  ${isLatest ? '<span style="background:#dcfce7;color:#04844b;font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:4px;">ACTUAL</span>' : ""}
                 </div>
-                <div style="font-size:10px;color:#64748b;margin-top:2px;">
-                  ${v.title || "Sin título"} · ${v.nodeCount} nodos · ${v.connCount} conexiones
+                <div style="font-size:10px;color:#64748b;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${titlesStr.replace(/"/g, "&quot;")}">
+                  ${titlesStr} · ${v.nodeCount || 0} nodos
                 </div>
                 <div style="font-size:9px;color:#94a3b8;margin-top:1px;">${d.toLocaleString()}</div>
               </div>
@@ -8047,6 +8105,67 @@
           .join("");
       }
 
+      // Aplica un workspace completo (todas las pestañas) al editor.
+      // Acepta el formato nuevo (version 2, con .journeys) y el viejo
+      // (una sola pestaña con .nodes en la raíz).
+      function _applyWorkspace(data) {
+        let tabs;
+        if (data && Array.isArray(data.journeys)) {
+          // Formato nuevo multi-pestaña
+          tabs = data.journeys.map((j) => ({
+            id: j.id || Date.now() + Math.floor(Math.random() * 100000),
+            title: j.title || "Journey",
+            state: j.state || _emptyState(j.title),
+          }));
+        } else if (data && Array.isArray(data.nodes)) {
+          // Formato viejo: un único journey en la raíz
+          tabs = [
+            {
+              id: Date.now(),
+              title: data.title || "Journey",
+              state: {
+                ..._emptyState(data.title),
+                nodes: data.nodes,
+                connections: data.connections || [],
+                textBoxes: data.textBoxes || [],
+                connWaypoints: data.connWaypoints || {},
+                nodeLabelOffsets: data.nodeLabelOffsets || {},
+                journeyMeta:
+                  data.meta?.journeyMeta || _emptyState().journeyMeta,
+                nodeIdCounter: (data.nodes || []).length
+                  ? Math.max(...data.nodes.map((n) => n.id)) + 1
+                  : 50,
+                title: data.title || "Journey",
+              },
+            },
+          ];
+        } else {
+          showNotif("⚠ Datos no válidos");
+          return false;
+        }
+
+        journeys = JSON.parse(JSON.stringify(tabs));
+        // Determinar pestaña activa
+        activeJourneyId =
+          (data.activeJourneyId &&
+            journeys.find((j) => j.id === data.activeJourneyId)?.id) ||
+          journeys[0].id;
+        if (typeof data.journeyCounter === "number")
+          journeyCounter = data.journeyCounter;
+
+        if (typeof clearDirty === "function") clearDirty();
+        if (typeof closePanel === "function") closePanel();
+
+        const active = journeys.find((j) => j.id === activeJourneyId);
+        _restoreState(active.state);
+        renderAll();
+        resetZoom();
+        updateStatsPanel();
+        _renderTabs();
+        clearUnsavedExport();
+        return true;
+      }
+
       function restoreVersion(id) {
         const history = _loadHistory();
         const v = history.find((h) => h.id === id);
@@ -8054,47 +8173,25 @@
           showNotif("⚠ No se encontró la versión");
           return;
         }
+        const tabCount =
+          v.tabCount != null
+            ? v.tabCount
+            : v.data && v.data.journeys
+              ? v.data.journeys.length
+              : 1;
         if (
           !confirm(
-            "¿Restaurar esta versión? El journey actual será reemplazado.\n\nSi no lo has guardado, perderás los cambios actuales.",
+            "¿Restaurar esta versión?\n\nSe reemplazarán TODAS las pestañas actuales (" +
+              tabCount +
+              " pestaña(s) se cargarán). Si no has guardado, perderás los cambios actuales.",
           )
         )
           return;
 
-        const data = v.data;
-        nodes = JSON.parse(JSON.stringify(data.nodes || []));
-        connections = JSON.parse(JSON.stringify(data.connections || []));
-        textBoxes = JSON.parse(JSON.stringify(data.textBoxes || []));
-        connWaypoints = JSON.parse(JSON.stringify(data.connWaypoints || {}));
-        nodeLabelOffsets = JSON.parse(
-          JSON.stringify(data.nodeLabelOffsets || {}),
-        );
-        if (data.meta?.journeyMeta) {
-          journeyMeta.audiencia = data.meta.journeyMeta.audiencia || "—";
-        }
-        if (data.title) {
-          document.getElementById("journey-title-display").textContent =
-            data.title;
-          if (
-            typeof journeys !== "undefined" &&
-            typeof activeJourneyId !== "undefined"
-          ) {
-            const activeTab = journeys.find((j) => j.id === activeJourneyId);
-            if (activeTab) activeTab.title = data.title;
-            if (typeof _renderTabs === "function") _renderTabs();
-          }
-        }
-        nodeIdCounter = nodes.length
-          ? Math.max(...nodes.map((n) => n.id)) + 1
-          : 50;
-        if (typeof clearDirty === "function") clearDirty();
-        if (typeof closePanel === "function") closePanel();
-        renderAll();
-        resetZoom();
-        updateStatsPanel();
-        clearUnsavedExport();
+        const ok = _applyWorkspace(v.data);
+        if (!ok) return;
         closeHistoryModal();
-        showNotif("↩ Versión restaurada");
+        showNotif("↩ Versión restaurada · " + tabCount + " pestaña(s)");
       }
 
       function deleteVersion(id) {
@@ -8129,16 +8226,32 @@
         reader.onload = function (e) {
           try {
             const parsed = JSON.parse(e.target.result);
-            if (!parsed.nodes || !Array.isArray(parsed.nodes)) {
+            const isMulti = Array.isArray(parsed.journeys);
+            const isSingle = Array.isArray(parsed.nodes);
+            if (!isMulti && !isSingle) {
               showNotif("⚠ El JSON no tiene el formato esperado");
               return;
             }
             pendingImportData = parsed;
-            document.getElementById("modal-import-msg").innerHTML =
-              `Archivo: <strong>${file.name}</strong><br>` +
-              `Nodos: <strong>${parsed.nodes.length}</strong> · ` +
-              `Conexiones: <strong>${(parsed.connections || []).length}</strong><br><br>` +
-              `⚠️ El journey actual será reemplazado.`;
+            let info;
+            if (isMulti) {
+              const totalNodes = parsed.journeys.reduce(
+                (s, j) => s + ((j.state && j.state.nodes) || []).length,
+                0,
+              );
+              info =
+                `Archivo: <strong>${file.name}</strong><br>` +
+                `Pestañas: <strong>${parsed.journeys.length}</strong> · ` +
+                `Nodos totales: <strong>${totalNodes}</strong><br><br>` +
+                `⚠️ TODAS las pestañas actuales serán reemplazadas.`;
+            } else {
+              info =
+                `Archivo: <strong>${file.name}</strong><br>` +
+                `Nodos: <strong>${parsed.nodes.length}</strong> · ` +
+                `Conexiones: <strong>${(parsed.connections || []).length}</strong><br><br>` +
+                `⚠️ El journey actual será reemplazado.`;
+            }
+            document.getElementById("modal-import-msg").innerHTML = info;
             document.getElementById("modal-import").classList.add("show");
           } catch (err) {
             showNotif("⚠ Error al leer el JSON: " + err.message);
@@ -8155,6 +8268,16 @@
       function confirmImport() {
         document.getElementById("modal-import").classList.remove("show");
         if (!pendingImportData) return;
+
+        // Formato nuevo multi-pestaña → restaurar todo el workspace
+        if (Array.isArray(pendingImportData.journeys)) {
+          const ok = _applyWorkspace(pendingImportData);
+          const n = pendingImportData.journeys.length;
+          pendingImportData = null;
+          if (ok) showNotif("✅ Workspace importado · " + n + " pestaña(s)");
+          return;
+        }
+
         clearDirty();
         closePanel();
 
@@ -10736,3 +10859,4 @@
     </script>
   </body>
 </html>
+clear

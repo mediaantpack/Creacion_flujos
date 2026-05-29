@@ -1858,21 +1858,32 @@
         background: #1a1a22;
         border-radius: 36px;
         padding: 10px;
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 20px 50px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          0 20px 50px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
         position: relative;
       }
       .push-phone-shell::before {
-        content: '';
+        content: "";
         position: absolute;
-        top: 10px; left: 50%;
+        top: 10px;
+        left: 50%;
         transform: translateX(-50%);
-        width: 60px; height: 5px;
+        width: 60px;
+        height: 5px;
         background: #2a2a36;
         border-radius: 8px;
         z-index: 5;
       }
       .push-phone-screen {
-        background: linear-gradient(160deg, #1a0a2e 0%, #2d0a3d 30%, #1a0833 65%, #0d0520 100%);
+        background: linear-gradient(
+          160deg,
+          #1a0a2e 0%,
+          #2d0a3d 30%,
+          #1a0833 65%,
+          #0d0520 100%
+        );
         border-radius: 28px;
         overflow: hidden;
         min-height: 400px;
@@ -1882,12 +1893,18 @@
         align-items: center;
       }
       .push-phone-screen::before {
-        content: '';
+        content: "";
         position: absolute;
-        top: -40px; left: 50%;
+        top: -40px;
+        left: 50%;
         transform: translateX(-50%);
-        width: 160px; height: 160px;
-        background: radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 58, 237, 0.3) 0%,
+          transparent 70%
+        );
         pointer-events: none;
       }
       .push-statusbar {
@@ -1898,9 +1915,13 @@
         padding: 8px 16px 0;
         font-size: 9px;
         font-weight: 700;
-        color: rgba(255,255,255,0.85);
+        color: rgba(255, 255, 255, 0.85);
       }
-      .push-statusbar-icons { display: flex; gap: 3px; align-items: center; }
+      .push-statusbar-icons {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+      }
       .push-clock {
         font-size: 44px;
         font-weight: 700;
@@ -1912,20 +1933,20 @@
       }
       .push-lockdate {
         font-size: 11px;
-        color: rgba(255,255,255,0.65);
+        color: rgba(255, 255, 255, 0.65);
         text-align: center;
         margin-top: 4px;
         margin-bottom: 16px;
       }
       .push-notif-card {
         margin: 0 8px;
-        background: rgba(255,255,255,0.13);
+        background: rgba(255, 255, 255, 0.13);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 14px;
         overflow: hidden;
         width: calc(100% - 16px);
-        border: 1px solid rgba(255,255,255,0.12);
+        border: 1px solid rgba(255, 255, 255, 0.12);
       }
       .push-notif-header {
         display: flex;
@@ -1934,74 +1955,165 @@
         padding: 8px 10px 6px;
       }
       .push-notif-app-icon {
-        width: 22px; height: 22px;
+        width: 22px;
+        height: 22px;
         border-radius: 6px;
-        background: var(--sf-red, #E8001D);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 11px; color: #fff; font-weight: 700; flex-shrink: 0;
+        background: var(--sf-red, #e8001d);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: #fff;
+        font-weight: 700;
+        flex-shrink: 0;
       }
       .push-notif-app-name {
-        font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.85); flex: 1;
-        text-transform: uppercase; letter-spacing: 0.3px;
+        font-size: 10px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        flex: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
       }
       .push-notif-time-badge {
-        font-size: 9px; color: rgba(255,255,255,0.5);
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.5);
       }
       .push-notif-body {
         padding: 0 10px 8px;
       }
       .push-notif-title-text {
-        font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 3px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 3px;
       }
       .push-notif-msg-text {
-        font-size: 10px; color: rgba(255,255,255,0.8); line-height: 1.4;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.4;
       }
       .push-benefit-pill {
-        display: inline-flex; align-items: center; gap: 4px;
-        background: rgba(255,208,0,0.18); border: 1px solid rgba(255,208,0,0.35);
-        border-radius: 20px; padding: 4px 10px;
-        font-size: 10px; font-weight: 700; color: #FFD000;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255, 208, 0, 0.18);
+        border: 1px solid rgba(255, 208, 0, 0.35);
+        border-radius: 20px;
+        padding: 4px 10px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #ffd000;
         margin-top: 6px;
       }
       .push-notif-img-preview {
-        width: 100%; max-height: 90px; object-fit: cover;
-        border-top: 1px solid rgba(255,255,255,0.1);
+        width: 100%;
+        max-height: 90px;
+        object-fit: cover;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
         display: block;
       }
       .push-notif-actions {
-        display: flex; gap: 6px; padding: 8px 10px;
-        border-top: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        gap: 6px;
+        padding: 8px 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
       .push-action-btn {
-        flex: 1; padding: 6px 8px;
-        border-radius: 8px; border: none; cursor: pointer;
-        font-size: 10px; font-weight: 700;
+        flex: 1;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 700;
       }
       .push-action-btn.primary {
-        background: var(--sf-red, #E8001D); color: #fff;
+        background: var(--sf-red, #e8001d);
+        color: #fff;
       }
       .push-action-btn.secondary {
-        background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8);
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.8);
       }
       .push-vencido-badge {
-        background: rgba(124,58,237,0.8); color: #fff;
-        font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px;
-        text-transform: uppercase; letter-spacing: 0.3px;
+        background: rgba(124, 58, 237, 0.8);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
       }
       .push-slide-hint {
-        font-size: 9px; color: rgba(255,255,255,0.4);
-        text-align: center; margin-top: 10px; margin-bottom: 6px;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 6px;
       }
       /* — legacy sidebar push stubs (keep for canvas mini-preview) — */
-      .push-phone { background: linear-gradient(135deg,#667eea,#764ba2); border-radius:16px; padding:16px; position:relative; min-height:180px; }
-      .push-time { color:#fff; font-size:28px; font-weight:200; text-align:center; margin-bottom:4px; }
-      .push-date { color:rgba(255,255,255,0.7); font-size:11px; text-align:center; margin-bottom:14px; }
-      .push-notif { background:rgba(255,255,255,0.92); border-radius:10px; padding:10px 12px; display:flex; gap:8px; backdrop-filter:blur(4px); }
-      .push-notif-icon { width:28px; height:28px; border-radius:6px; background:var(--sf-red); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
-      .push-notif-txt { flex:1; }
-      .push-notif-app { font-size:9px; font-weight:700; color:#555; text-transform:uppercase; }
-      .push-notif-msg { font-size:11px; color:#111; line-height:1.4; margin-top:2px; }
-      .push-slide { font-size:9px; color:rgba(255,255,255,0.6); text-align:center; margin-top:8px; }
+      .push-phone {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 16px;
+        padding: 16px;
+        position: relative;
+        min-height: 180px;
+      }
+      .push-time {
+        color: #fff;
+        font-size: 28px;
+        font-weight: 200;
+        text-align: center;
+        margin-bottom: 4px;
+      }
+      .push-date {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 11px;
+        text-align: center;
+        margin-bottom: 14px;
+      }
+      .push-notif {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 10px;
+        padding: 10px 12px;
+        display: flex;
+        gap: 8px;
+        backdrop-filter: blur(4px);
+      }
+      .push-notif-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--sf-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      .push-notif-txt {
+        flex: 1;
+      }
+      .push-notif-app {
+        font-size: 9px;
+        font-weight: 700;
+        color: #555;
+        text-transform: uppercase;
+      }
+      .push-notif-msg {
+        font-size: 11px;
+        color: #111;
+        line-height: 1.4;
+        margin-top: 2px;
+      }
+      .push-slide {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        margin-top: 8px;
+      }
 
       /* — SMS preview — */
       .sms-phone {
@@ -2647,11 +2759,27 @@
         </button>
         <button
           class="btn btn-white"
-          id="btn-save"
+          id="btn-export-json"
           onclick="saveFlow()"
-          title="Guardar y descargar JSON"
+          title="Descargar el journey como archivo JSON"
+        >
+          ⬇️ Exportar JSON
+        </button>
+        <button
+          class="btn btn-green"
+          id="btn-save"
+          onclick="saveToTool()"
+          title="Guardar este cambio en la herramienta (con historial)"
         >
           💾 Guardar
+        </button>
+        <button
+          class="btn btn-load"
+          id="btn-history"
+          onclick="openHistoryModal()"
+          title="Ver el historial de versiones guardadas"
+        >
+          🕘 Historial
         </button>
         <button
           class="btn btn-load"
@@ -3077,17 +3205,77 @@
             👁 Vista previa del mensaje
           </button>
           <!-- Image upload bar for push/email/whatsapp — shown outside modal -->
-          <div id="pm-img-upload-bar" style="display:none;margin-top:8px;width:100%;background:#f8faff;border:1.5px dashed #93c5fd;border-radius:8px;padding:8px 12px;box-sizing:border-box;align-items:center;gap:8px;flex-shrink:0">
-            <span style="font-size:14px">🖼</span>
-            <div style="flex:1;min-width:0">
-              <div style="font-size:11px;font-weight:700;color:#1d4ed8">Imagen del beneficio</div>
-              <div style="font-size:10px;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="pm-img-label">Sube una imagen para el botón "Ver beneficio"</div>
+          <div
+            id="pm-img-upload-bar"
+            style="
+              display: none;
+              margin-top: 8px;
+              width: 100%;
+              background: #f8faff;
+              border: 1.5px dashed #93c5fd;
+              border-radius: 8px;
+              padding: 8px 12px;
+              box-sizing: border-box;
+              align-items: center;
+              gap: 8px;
+              flex-shrink: 0;
+            "
+          >
+            <span style="font-size: 14px">🖼</span>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 11px; font-weight: 700; color: #1d4ed8">
+                Imagen del beneficio
+              </div>
+              <div
+                style="
+                  font-size: 10px;
+                  color: #6b7280;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
+                id="pm-img-label"
+              >
+                Sube una imagen para el botón "Ver beneficio"
+              </div>
             </div>
-            <label style="background:#2563EB;color:#fff;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;flex-shrink:0">
+            <label
+              style="
+                background: #2563eb;
+                color: #fff;
+                font-size: 10px;
+                font-weight: 700;
+                padding: 5px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+                flex-shrink: 0;
+              "
+            >
               📤 Cargar
-              <input type="file" accept="image/*" style="display:none" onchange="pmUploadBenefitImage(this)">
+              <input
+                type="file"
+                accept="image/*"
+                style="display: none"
+                onchange="pmUploadBenefitImage(this)"
+              />
             </label>
-            <button id="pm-img-clear-btn" onclick="pmClearBenefitImage()" style="display:none;background:#fee2e2;color:#c23934;border:none;border-radius:6px;padding:5px 8px;font-size:10px;font-weight:700;cursor:pointer">✕</button>
+            <button
+              id="pm-img-clear-btn"
+              onclick="pmClearBenefitImage()"
+              style="
+                display: none;
+                background: #fee2e2;
+                color: #c23934;
+                border: none;
+                border-radius: 6px;
+                padding: 5px 8px;
+                font-size: 10px;
+                font-weight: 700;
+                cursor: pointer;
+              "
+            >
+              ✕
+            </button>
           </div>
         </div>
         <div class="dp-footer">
@@ -7318,15 +7506,20 @@
       function _pmUpdateImgBar(n) {
         const bar = document.getElementById("pm-img-upload-bar");
         if (!bar) return;
-        const types = ["push","email","whatsapp"];
-        if (!n || !types.includes(n.type)) { bar.style.display = "none"; return; }
+        const types = ["push", "email", "whatsapp"];
+        if (!n || !types.includes(n.type)) {
+          bar.style.display = "none";
+          return;
+        }
         bar.style.display = "flex";
         const hasSrc = _pmBenefitImages[n.id];
         document.getElementById("pm-img-label").textContent = hasSrc
           ? "✅ Imagen cargada — se mostrará al hacer clic en los botones"
-          : n.type === "push" ? "Sube una imagen para el botón \"Ver beneficio\""
-          : n.type === "email" ? "Sube una imagen de encabezado para el email"
-          : "Sube una imagen para los botones del mensaje";
+          : n.type === "push"
+            ? 'Sube una imagen para el botón "Ver beneficio"'
+            : n.type === "email"
+              ? "Sube una imagen de encabezado para el email"
+              : "Sube una imagen para los botones del mensaje";
         const clearBtn = document.getElementById("pm-img-clear-btn");
         if (clearBtn) clearBtn.style.display = hasSrc ? "inline-flex" : "none";
       }
@@ -7334,11 +7527,12 @@
       function pmUploadBenefitImage(input) {
         if (!pmNode || !input.files || !input.files[0]) return;
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           _pmBenefitImages[pmNode.id] = e.target.result;
           _pmUpdateImgBar(pmNode);
           // Re-render the preview with the new image
-          document.getElementById("pm-content").innerHTML = pmRenderWithVars(pmNode);
+          document.getElementById("pm-content").innerHTML =
+            pmRenderWithVars(pmNode);
         };
         reader.readAsDataURL(input.files[0]);
       }
@@ -7347,7 +7541,8 @@
         if (!pmNode) return;
         delete _pmBenefitImages[pmNode.id];
         _pmUpdateImgBar(pmNode);
-        document.getElementById("pm-content").innerHTML = pmRenderWithVars(pmNode);
+        document.getElementById("pm-content").innerHTML =
+          pmRenderWithVars(pmNode);
       }
 
       /* Open benefit image in a lightbox */
@@ -7358,13 +7553,16 @@
         if (!lb) {
           lb = document.createElement("div");
           lb.id = "benefit-lightbox";
-          lb.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;";
+          lb.style.cssText =
+            "position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;";
           lb.innerHTML = `<div style="position:relative;max-width:90vw;max-height:90vh">
             <img id="benefit-lb-img" style="max-width:90vw;max-height:85vh;object-fit:contain;border-radius:10px;box-shadow:0 8px 40px rgba(0,0,0,0.6)" />
             <button onclick="document.getElementById('benefit-lightbox').style.display='none';event.stopPropagation()"
               style="position:absolute;top:-14px;right:-14px;background:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">✕</button>
           </div>`;
-          lb.addEventListener("click", function(e) { if (e.target === lb) lb.style.display = "none"; });
+          lb.addEventListener("click", function (e) {
+            if (e.target === lb) lb.style.display = "none";
+          });
           document.body.appendChild(lb);
         }
         document.getElementById("benefit-lb-img").src = src;
@@ -7648,11 +7846,13 @@
       /* ════════════════════════════════
    SAVE / IMPORT JSON
 ════════════════════════════════ */
-      function saveFlow() {
+      // Construye el objeto serializable del journey actual (reutilizado por
+      // exportación a archivo y por el guardado en la herramienta).
+      function _buildFlowData() {
         const title = document.getElementById(
           "journey-title-display",
         ).textContent;
-        const data = {
+        return {
           nodes,
           connections,
           textBoxes,
@@ -7661,15 +7861,260 @@
           title,
           meta: { saved: new Date().toISOString(), journeyMeta },
         };
+      }
+
+      function saveFlow() {
+        const data = _buildFlowData();
         localStorage.setItem("jb_flow", JSON.stringify(data));
         const a = document.createElement("a");
         a.href =
           "data:application/json," +
           encodeURIComponent(JSON.stringify(data, null, 2));
-        a.download = "journey_flow.json";
+        a.download =
+          (data.title || "journey_flow").replace(/\s+/g, "_") + ".json";
         a.click();
+        showNotif("⬇️ Journey exportado como archivo JSON");
+      }
+
+      /* ════════════════════════════════
+   GUARDAR EN LA HERRAMIENTA + HISTORIAL
+   Cada guardado crea una versión nueva en localStorage bajo la clave
+   "jb_history". Se conserva un máximo de versiones para no llenar el
+   almacenamiento. El último guardado también queda como "jb_flow" para
+   que la herramienta pueda restaurar el estado al recargar.
+════════════════════════════════ */
+      const JB_HISTORY_KEY = "jb_history";
+      const JB_HISTORY_MAX = 50;
+
+      function _loadHistory() {
+        try {
+          const raw = localStorage.getItem(JB_HISTORY_KEY);
+          const arr = raw ? JSON.parse(raw) : [];
+          return Array.isArray(arr) ? arr : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function _writeHistory(arr) {
+        try {
+          localStorage.setItem(JB_HISTORY_KEY, JSON.stringify(arr));
+          return true;
+        } catch (e) {
+          // Si se llena el almacenamiento, vamos eliminando las versiones más
+          // antiguas hasta que quepa.
+          while (arr.length > 1) {
+            arr.shift();
+            try {
+              localStorage.setItem(JB_HISTORY_KEY, JSON.stringify(arr));
+              return true;
+            } catch (e2) {
+              /* seguir podando */
+            }
+          }
+          showNotif("⚠ No hay espacio para guardar más versiones");
+          return false;
+        }
+      }
+
+      function saveToTool() {
+        const data = _buildFlowData();
+        const history = _loadHistory();
+
+        const version = {
+          id: "v_" + Date.now(),
+          savedAt: new Date().toISOString(),
+          title: data.title,
+          nodeCount: (data.nodes || []).length,
+          connCount: (data.connections || []).length,
+          data: data,
+        };
+
+        history.push(version);
+        // Limitar el tamaño del historial
+        while (history.length > JB_HISTORY_MAX) history.shift();
+
+        const ok = _writeHistory(history);
+        if (!ok) return;
+
+        // Guardar también como estado "actual" para recarga
+        try {
+          localStorage.setItem("jb_flow", JSON.stringify(data));
+        } catch (e) {}
+
         clearUnsavedExport();
-        showNotif("💾 Flujo guardado y descargado como JSON");
+        _updateSaveMeta(version.savedAt);
+        showNotif("💾 Guardado en la herramienta · versión #" + history.length);
+      }
+
+      // Muestra junto al botón cuándo fue el último guardado
+      function _updateSaveMeta(iso) {
+        const btn = document.getElementById("btn-save");
+        if (!btn) return;
+        const d = new Date(iso);
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+        btn.title = "Último guardado: " + d.toLocaleString();
+        let badge = document.getElementById("save-meta");
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.id = "save-meta";
+          badge.style.cssText =
+            "font-size:9px;color:#fff;opacity:.8;margin-left:2px;white-space:nowrap;";
+          btn.parentNode.insertBefore(badge, btn.nextSibling);
+        }
+        badge.textContent = "✓ " + hh + ":" + mm;
+      }
+
+      /* ─── Modal de historial ─── */
+      let _pendingRestoreId = null;
+
+      function openHistoryModal() {
+        let modal = document.getElementById("history-modal");
+        if (!modal) {
+          modal = _buildHistoryModal();
+          document.body.appendChild(modal);
+        }
+        _renderHistoryList();
+        modal.style.display = "flex";
+      }
+
+      function closeHistoryModal() {
+        const m = document.getElementById("history-modal");
+        if (m) m.style.display = "none";
+      }
+
+      function _buildHistoryModal() {
+        const wrap = document.createElement("div");
+        wrap.id = "history-modal";
+        wrap.style.cssText =
+          "display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;align-items:center;justify-content:center;";
+        wrap.innerHTML = `
+          <div style="background:#fff;width:520px;max-width:92vw;max-height:80vh;border-radius:12px;
+            box-shadow:0 10px 40px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;">
+            <div style="background:#0f172a;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-size:14px;font-weight:800;">🕘 Historial de versiones</div>
+                <div style="font-size:10px;opacity:.7;margin-top:2px;">Cada guardado crea una versión que puedes restaurar</div>
+              </div>
+              <button onclick="closeHistoryModal()" style="background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;">✕</button>
+            </div>
+            <div id="history-list" style="flex:1;overflow-y:auto;padding:10px 14px;background:#f8fafc;"></div>
+            <div style="padding:10px 14px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;background:#fff;">
+              <button onclick="clearAllHistory()" style="background:#fee2e2;color:#c23934;border:1px solid #fca5a5;border-radius:6px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;">🗑 Borrar todo</button>
+              <button onclick="closeHistoryModal()" style="background:#0070d2;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;">Cerrar</button>
+            </div>
+          </div>`;
+        wrap.addEventListener("click", function (e) {
+          if (e.target === wrap) closeHistoryModal();
+        });
+        return wrap;
+      }
+
+      function _renderHistoryList() {
+        const cont = document.getElementById("history-list");
+        if (!cont) return;
+        const history = _loadHistory();
+        if (history.length === 0) {
+          cont.innerHTML =
+            '<div style="text-align:center;color:#94a3b8;font-size:12px;padding:30px 0;">Aún no hay versiones guardadas.<br>Presiona <strong>💾 Guardar</strong> para crear la primera.</div>';
+          return;
+        }
+        // Más reciente arriba
+        cont.innerHTML = history
+          .slice()
+          .reverse()
+          .map((v, idx) => {
+            const num = history.length - idx;
+            const d = new Date(v.savedAt);
+            const isLatest = idx === 0;
+            return `
+            <div style="background:#fff;border:1.5px solid ${isLatest ? "#04844b" : "#e2e8f0"};border-radius:8px;padding:11px 13px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:12px;font-weight:700;color:#1e293b;">
+                  Versión #${num}
+                  ${isLatest ? '<span style="background:#dcfce7;color:#04844b;font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;margin-left:6px;">ACTUAL</span>' : ""}
+                </div>
+                <div style="font-size:10px;color:#64748b;margin-top:2px;">
+                  ${v.title || "Sin título"} · ${v.nodeCount} nodos · ${v.connCount} conexiones
+                </div>
+                <div style="font-size:9px;color:#94a3b8;margin-top:1px;">${d.toLocaleString()}</div>
+              </div>
+              <button onclick="restoreVersion('${v.id}')" style="background:#e8f0fe;color:#1a56db;border:1px solid #93c5fd;border-radius:6px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;">↩ Restaurar</button>
+              <button onclick="deleteVersion('${v.id}')" title="Eliminar versión" style="background:#fef2f2;color:#c23934;border:1px solid #fecaca;border-radius:6px;padding:5px 8px;font-size:11px;cursor:pointer;">🗑</button>
+            </div>`;
+          })
+          .join("");
+      }
+
+      function restoreVersion(id) {
+        const history = _loadHistory();
+        const v = history.find((h) => h.id === id);
+        if (!v) {
+          showNotif("⚠ No se encontró la versión");
+          return;
+        }
+        if (
+          !confirm(
+            "¿Restaurar esta versión? El journey actual será reemplazado.\n\nSi no lo has guardado, perderás los cambios actuales.",
+          )
+        )
+          return;
+
+        const data = v.data;
+        nodes = JSON.parse(JSON.stringify(data.nodes || []));
+        connections = JSON.parse(JSON.stringify(data.connections || []));
+        textBoxes = JSON.parse(JSON.stringify(data.textBoxes || []));
+        connWaypoints = JSON.parse(JSON.stringify(data.connWaypoints || {}));
+        nodeLabelOffsets = JSON.parse(
+          JSON.stringify(data.nodeLabelOffsets || {}),
+        );
+        if (data.meta?.journeyMeta) {
+          journeyMeta.audiencia = data.meta.journeyMeta.audiencia || "—";
+        }
+        if (data.title) {
+          document.getElementById("journey-title-display").textContent =
+            data.title;
+          if (
+            typeof journeys !== "undefined" &&
+            typeof activeJourneyId !== "undefined"
+          ) {
+            const activeTab = journeys.find((j) => j.id === activeJourneyId);
+            if (activeTab) activeTab.title = data.title;
+            if (typeof _renderTabs === "function") _renderTabs();
+          }
+        }
+        nodeIdCounter = nodes.length
+          ? Math.max(...nodes.map((n) => n.id)) + 1
+          : 50;
+        if (typeof clearDirty === "function") clearDirty();
+        if (typeof closePanel === "function") closePanel();
+        renderAll();
+        resetZoom();
+        updateStatsPanel();
+        clearUnsavedExport();
+        closeHistoryModal();
+        showNotif("↩ Versión restaurada");
+      }
+
+      function deleteVersion(id) {
+        let history = _loadHistory();
+        history = history.filter((h) => h.id !== id);
+        _writeHistory(history);
+        _renderHistoryList();
+        showNotif("🗑 Versión eliminada");
+      }
+
+      function clearAllHistory() {
+        if (
+          !confirm(
+            "¿Borrar TODO el historial de versiones? No se puede deshacer.",
+          )
+        )
+          return;
+        localStorage.removeItem(JB_HISTORY_KEY);
+        _renderHistoryList();
+        showNotif("🗑 Historial borrado");
       }
 
       function triggerImportJSON() {
@@ -8665,11 +9110,18 @@
             ? "linear-gradient(135deg,#059669,#064e3b)"
             : "linear-gradient(135deg,#E8001D,#8B0010)";
         const heroEmoji = isUrgente ? "⏰" : isOferta ? "🎁" : "⛽";
-        const ctaLabel = isUrgente ? "¡APROVECHA ANTES DE QUE EXPIRE!" : isOferta ? "VER MI OFERTA EXCLUSIVA" : "RECIBIR MIS BENEFICIOS";
-        const imgSrc = _pmBenefitImages && _pmBenefitImages[n.id] ? _pmBenefitImages[n.id] : "";
+        const ctaLabel = isUrgente
+          ? "¡APROVECHA ANTES DE QUE EXPIRE!"
+          : isOferta
+            ? "VER MI OFERTA EXCLUSIVA"
+            : "RECIBIR MIS BENEFICIOS";
+        const imgSrc =
+          _pmBenefitImages && _pmBenefitImages[n.id]
+            ? _pmBenefitImages[n.id]
+            : "";
         const heroImgHtml = imgSrc
           ? `<img src="${imgSrc}" style="width:100%;border-radius:8px;margin-bottom:12px;display:block;max-height:140px;object-fit:cover" alt="Imagen email">`
-          : `<div style="background:${heroBg};border-radius:8px;padding:20px;color:#fff;text-align:center;margin-bottom:12px"><div style="font-size:28px;margin-bottom:6px">${heroEmoji}</div><div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px">${subject}</div><div style="font-size:11px;opacity:0.85;margin-top:5px">${body.substring(0,80)}${body.length>80?"…":""}</div></div>`;
+          : `<div style="background:${heroBg};border-radius:8px;padding:20px;color:#fff;text-align:center;margin-bottom:12px"><div style="font-size:28px;margin-bottom:6px">${heroEmoji}</div><div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px">${subject}</div><div style="font-size:11px;opacity:0.85;margin-top:5px">${body.substring(0, 80)}${body.length > 80 ? "…" : ""}</div></div>`;
         return `
   <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;background:#f4f4f4;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.1)">
     <!-- Email client chrome -->
@@ -8702,7 +9154,7 @@
       <div style="background:#f9fafb;border-radius:8px;padding:10px;margin-bottom:14px">
         <div style="font-size:10px;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:8px;letter-spacing:0.5px">Tus beneficios activos</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center">
-          ${["⛽<br>Combustible","🛒<br>Altoque","🎁<br>Puntos","🏷<br>Promos"].map(b=>`<div style="background:#fff;border-radius:6px;padding:6px 4px;font-size:9px;color:#444;border:1px solid #eee">${b}</div>`).join("")}
+          ${["⛽<br>Combustible", "🛒<br>Altoque", "🎁<br>Puntos", "🏷<br>Promos"].map((b) => `<div style="background:#fff;border-radius:6px;padding:6px 4px;font-size:9px;color:#444;border:1px solid #eee">${b}</div>`).join("")}
         </div>
       </div>
       <!-- CTA -->
@@ -8730,13 +9182,20 @@
           : msg.toLowerCase().includes("%")
             ? "¡Quiero mi descuento!"
             : "¡Saber más!";
-        const timeStr = time.includes(":") ? time.replace(/^D\d+\s+/, "") : time;
-        const imgSrc = _pmBenefitImages && _pmBenefitImages[n.id] ? _pmBenefitImages[n.id] : "";
+        const timeStr = time.includes(":")
+          ? time.replace(/^D\d+\s+/, "")
+          : time;
+        const imgSrc =
+          _pmBenefitImages && _pmBenefitImages[n.id]
+            ? _pmBenefitImages[n.id]
+            : "";
         const imgHtml = imgSrc
           ? `<img src="${imgSrc}" style="width:100%;border-radius:6px;margin-bottom:6px;display:block;max-height:120px;object-fit:cover" alt="Imagen">`
           : "";
         // CTA buttons: if image loaded, clicking opens it in lightbox
-        const ctaClick = imgSrc ? `onclick="pmShowBenefitLightbox('${n.id}')" style="cursor:pointer"` : `style="cursor:default"`;
+        const ctaClick = imgSrc
+          ? `onclick="pmShowBenefitLightbox('${n.id}')" style="cursor:pointer"`
+          : `style="cursor:default"`;
         return `
   <div style="max-width:340px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.12)">
     <!-- WA App chrome -->
@@ -8765,8 +9224,8 @@
         </div>
       </div>
       <div class="wa-btns">
-        <div class="wa-btn" ${ctaClick} style="color:#128c7e;font-weight:700;${imgSrc ? 'cursor:pointer;' : ''}">🔗 ${isCTA1}${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ''}</div>
-        <div class="wa-btn" ${ctaClick} style="color:#128c7e;${imgSrc ? 'cursor:pointer;' : ''}">ℹ️ Más información${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ''}</div>
+        <div class="wa-btn" ${ctaClick} style="color:#128c7e;font-weight:700;${imgSrc ? "cursor:pointer;" : ""}">🔗 ${isCTA1}${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ""}</div>
+        <div class="wa-btn" ${ctaClick} style="color:#128c7e;${imgSrc ? "cursor:pointer;" : ""}">ℹ️ Más información${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ""}</div>
       </div>
       <!-- Input bar -->
       <div style="background:#f0f0f0;padding:7px 10px;display:flex;align-items:center;gap:6px;border-top:1px solid #ddd">
@@ -8790,7 +9249,10 @@
         const time = n.data.time || "";
         const linkMatch = msg.match(/(https?:\/\/[^\s]+)/);
         const linkUrl = linkMatch ? linkMatch[1] : "";
-        const msgDisplay = msg.replace(/(https?:\/\/[^\s]+)/g, `<a href="#" style="color:#007AFF;text-decoration:none">$1</a>`);
+        const msgDisplay = msg.replace(
+          /(https?:\/\/[^\s]+)/g,
+          `<a href="#" style="color:#007AFF;text-decoration:none">$1</a>`,
+        );
         return `
   <div style="max-width:300px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif">
     <!-- Phone chrome -->
@@ -8833,21 +9295,38 @@
       function buildPushPreview(n) {
         const title = stripTags(n.data.title) || "Hola Carlos, tienes un aviso";
         const msg =
-          stripTags(n.data.message) || "Tu beneficio \"Bono Combustible $20.000\" venció. Contáctanos para renovarlo.";
+          stripTags(n.data.message) ||
+          'Tu beneficio "Bono Combustible $20.000" venció. Contáctanos para renovarlo.';
         const time = n.data.time || "";
         const subtitle = stripTags(n.data.subtitle) || "";
         const intentType = stripTags(n.data.intentType) || "";
         const timeHHMM = time.replace(/^D\d+\s+/, "") || "12:12";
         const now = new Date();
-        const dateStr = now.toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" });
-        const dateFormatted = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        const dateStr = now.toLocaleDateString("es-CO", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+        const dateFormatted =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
         // benefit pill label from intentType
-        const pillLabel = intentType === "Bono" ? "🪙 Bono Combustible $20.000"
-          : intentType === "Compra" ? "🛒 Beneficio de Compra"
-          : intentType === "Evento" ? "📅 Evento Especial"
-          : subtitle ? `✨ ${subtitle.substring(0, 28)}` : "🪙 Ver beneficio";
-        const imgSrc = _pmBenefitImages && _pmBenefitImages[n.id] ? _pmBenefitImages[n.id] : "";
-        const imgHtml = imgSrc ? `<img src="${imgSrc}" class="push-notif-img-preview" alt="Imagen beneficio">` : "";
+        const pillLabel =
+          intentType === "Bono"
+            ? "🪙 Bono Combustible $20.000"
+            : intentType === "Compra"
+              ? "🛒 Beneficio de Compra"
+              : intentType === "Evento"
+                ? "📅 Evento Especial"
+                : subtitle
+                  ? `✨ ${subtitle.substring(0, 28)}`
+                  : "🪙 Ver beneficio";
+        const imgSrc =
+          _pmBenefitImages && _pmBenefitImages[n.id]
+            ? _pmBenefitImages[n.id]
+            : "";
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" class="push-notif-img-preview" alt="Imagen beneficio">`
+          : "";
         return `
   <div class="push-mockup-wrap">
     <div class="push-phone-shell">
@@ -9092,6 +9571,13 @@
       resetZoom();
       updateStatsPanel();
       _initHistory(); // seed initial snapshot
+      // Si ya hay versiones guardadas en la herramienta, mostrar la hora del
+      // último guardado junto al botón (no restaura automáticamente; el
+      // usuario decide desde el botón Historial).
+      (function _showLastSaveBadge() {
+        const h = _loadHistory();
+        if (h.length) _updateSaveMeta(h[h.length - 1].savedAt);
+      })();
       // Wire preview modal overlay click (DOM is ready here)
       const _pmOv = document.getElementById("preview-modal-overlay");
       if (_pmOv)

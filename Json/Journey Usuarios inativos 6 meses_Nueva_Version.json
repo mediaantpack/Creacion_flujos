@@ -1,0 +1,989 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "type": "entry",
+      "x": 0,
+      "y": 534.089330062231,
+      "data": {
+        "title": "Base de datos",
+        "subtitle": "Usuarios inactivos\nmas de 6 meses",
+        "file": "inactivos.csv",
+        "contacts": "~800,000",
+        "_hide_title": true,
+        "_rich_subtitle": "Usuarios inactivos <br>mas de 6 meses"
+      }
+    },
+    {
+      "id": 3,
+      "type": "split",
+      "x": 346.4031023079583,
+      "y": 530.6746959158895,
+      "data": {
+        "title": "Actividad reciente de vive terpel",
+        "subtitle": "¿El usuario a entrado recientemente a la aplicacion de vive terpel?",
+        "time": "",
+        "condition": "App Descargada",
+        "waitHours": ""
+      }
+    },
+    {
+      "id": 51,
+      "type": "decision",
+      "x": 144.47242909353793,
+      "y": 530.4924323701895,
+      "data": {
+        "title": "Compras desde marzo o 6 mes ",
+        "subtitle": "El usuario a realizado compras desde marzo o 6 meses anteriores ",
+        "time": "",
+        "condition": ""
+      }
+    },
+    {
+      "id": 52,
+      "type": "exit_ok",
+      "x": 148.04878048780492,
+      "y": 722.5577931440271,
+      "data": {
+        "title": "Exito Positivo",
+        "subtitle": "el usuario si realizo compras ",
+        "segment": ""
+      }
+    },
+    {
+      "id": 53,
+      "type": "push",
+      "x": 542.6645584580812,
+      "y": 538.1260653590116,
+      "data": {
+        "title": "Push App + BannerPush",
+        "subtitle": "¡Bienvenido de vuelta!\nBono esperando Banner nativo",
+        "time": "",
+        "message": "Mi Cuenta/Promoción\"Intensidad: Alta (ya tiene hábito de app",
+        "intentType": "Bono",
+        "_rich_subtitle": "¡Bienvenido de vuelta! <br>Bono esperando Banner nativo",
+        "_rich_message": "Mi Cuenta/Promoción\"Intensidad: Alta (ya tiene hábito de app"
+      }
+    },
+    {
+      "id": 55,
+      "type": "wait",
+      "x": 821.7041866120951,
+      "y": 544.9615262816795,
+      "data": {
+        "title": "Tiempo",
+        "subtitle": "Tiempo estimado 1 dia",
+        "duration": "1",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 56,
+      "type": "decision",
+      "x": 862.3077829625415,
+      "y": 359.0881645269404,
+      "data": {
+        "title": "¿Redimió bono en la plataforma?",
+        "subtitle": "El usuario realizo la accion de rediccion del bono en la plataforma",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 60,
+      "type": "wait",
+      "x": 1037.329241884856,
+      "y": 150.6781223432823,
+      "data": {
+        "title": "Tiempo ",
+        "subtitle": "Espera por 3 dias ",
+        "duration": "3",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 61,
+      "type": "decision",
+      "x": 1251.6822987110952,
+      "y": 141.47797588697236,
+      "data": {
+        "title": "¿Redimió bono en la plataforma?",
+        "subtitle": "El usuario realizo la accion de rediccion del bono en la plataforma",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 63,
+      "type": "whatsapp",
+      "x": 1424.0443224454775,
+      "y": 144.719598898936,
+      "data": {
+        "title": "WhatsApp (último toque)",
+        "subtitle": "Conversacional + link directo a plataforma",
+        "time": "",
+        "message": "Estas a un toque de redimir tu bono",
+        "template": "",
+        "_w": 160,
+        "intentType": "Link directo a Terpel",
+        "_rich_subtitle": "Conversacional + link directo a plataforma",
+        "_rich_message": "Estas a un toque de redimir tu bono "
+      }
+    },
+    {
+      "id": 64,
+      "type": "banner",
+      "x": 1655.0553723880369,
+      "y": 289.38384310383174,
+      "data": {
+        "title": "App Banner",
+        "subtitle": ""
+      }
+    },
+    {
+      "id": 66,
+      "type": "wait",
+      "x": 1421.8574128342364,
+      "y": 297.1139777927651,
+      "data": {
+        "title": "Tiempo",
+        "subtitle": "El tiempo estimado es de 2 horas",
+        "duration": "2",
+        "unit": "horas"
+      }
+    },
+    {
+      "id": 67,
+      "type": "wait",
+      "x": 1648.4226200351611,
+      "y": 154.75746551236162,
+      "data": {
+        "title": "Tiempo",
+        "subtitle": "Tiempo estimado 1 dia",
+        "duration": "1",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 68,
+      "type": "decision",
+      "x": 1884.7164266037523,
+      "y": 143.8759076816668,
+      "data": {
+        "title": "¿Redimió bono en la plataforma?",
+        "subtitle": "El usuario realizo la accion de rediccion del bono en la plataforma",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 71,
+      "type": "exit_ok",
+      "x": 2387.3831426666584,
+      "y": 150.03510755060077,
+      "data": {
+        "title": "Exit Positivo",
+        "subtitle": "El usuario pasa por activacion para el siguiente mes",
+        "segment": "El usuario se reactivo y se continua campaña para el siguiente mes"
+      }
+    },
+    {
+      "id": 73,
+      "type": "exit_bad",
+      "x": 1890.0271259719498,
+      "y": 0,
+      "data": {
+        "title": "Exit Negativo",
+        "subtitle": "El usurio queda pendiente para continuar en campaña, este se llevara por 3 meses hasta que se consiga reactivar al usuario",
+        "segment": "Usuarios que no han activado o realizado compra",
+        "action": "Por activar cliente"
+      }
+    },
+    {
+      "id": 77,
+      "type": "wait",
+      "x": 531.7133356689192,
+      "y": 727.4296047226344,
+      "data": {
+        "title": "Tiempo",
+        "subtitle": "El tiempo estimado es de un dia ",
+        "duration": "1",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 78,
+      "type": "decision",
+      "x": 570.9530907277665,
+      "y": 850.939504104184,
+      "data": {
+        "title": "¿El usurio a entrado a la app recientemente?",
+        "subtitle": "El usuario a descargado la aplicacion de terpel y redimio el bono",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 80,
+      "type": "exit_ok",
+      "x": 823.529305210871,
+      "y": 1089.045138065032,
+      "data": {
+        "title": "Exit Positivo",
+        "subtitle": "En espera para la campaña del siguiente mes ",
+        "segment": ""
+      }
+    },
+    {
+      "id": 81,
+      "type": "join",
+      "x": 1448.606785764531,
+      "y": 481.6142976751143,
+      "data": {
+        "title": "Join",
+        "subtitle": "",
+        "_hide_title": true,
+        "_rich_subtitle": ""
+      }
+    },
+    {
+      "id": 83,
+      "type": "whatsapp",
+      "x": 736.508945233904,
+      "y": 854.2941387459252,
+      "data": {
+        "title": "Tienes un bono",
+        "subtitle": "Descarga ViveTerpel app\"Formato corto + número de soporte",
+        "time": "",
+        "message": "Descarga la app de vive terpel y reclama tu bono",
+        "template": "",
+        "_w": 160,
+        "intentType": "Bono",
+        "_rich_subtitle": "Descarga ViveTerpel app\"Formato corto + número de soporte",
+        "_rich_message": "Descarga la app de vive terpel y reclama tu bono"
+      }
+    },
+    {
+      "id": 84,
+      "type": "wait",
+      "x": 958.7973816018608,
+      "y": 859.3882907683808,
+      "data": {
+        "title": "Tiempo ",
+        "subtitle": "Tiempo extimado de un dia ",
+        "duration": "1",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 85,
+      "type": "decision",
+      "x": 1164.3790744161581,
+      "y": 847.6827513145073,
+      "data": {
+        "title": "¿Redimió bono en la plataforma?",
+        "subtitle": "El usuario realizo la accion de rediccion del bono en la plataforma",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 88,
+      "type": "wait",
+      "x": 1666.3414634146343,
+      "y": 864.878048780488,
+      "data": {
+        "title": "Tiempo ",
+        "subtitle": "Tiempo extimado de 3 dias",
+        "duration": "3",
+        "unit": "días"
+      }
+    },
+    {
+      "id": 89,
+      "type": "decision",
+      "x": 1983.9781805958178,
+      "y": 857.6796651556921,
+      "data": {
+        "title": "¿Redimió bono en la plataforma?",
+        "subtitle": "El usuario realizo la accion de rediccion del bono en la plataforma",
+        "time": "",
+        "condition": "Redimió bono"
+      }
+    },
+    {
+      "id": 90,
+      "type": "exit_bad",
+      "x": 2272.224521433606,
+      "y": 860.061703625193,
+      "data": {
+        "title": "Exit Negativo",
+        "subtitle": "El usurio queda pendiente para continuar en campaña, este se llevara por 3 meses hasta que se consiga reactivar al usuario",
+        "segment": "Usuarios que no han activado o realizado compra",
+        "action": "Por activar cliente"
+      }
+    },
+    {
+      "id": 91,
+      "type": "whatsapp",
+      "x": 809.6523542849045,
+      "y": 142.11976667793851,
+      "data": {
+        "title": "Email Urgencia Asunto",
+        "subtitle": "Últimas 48 horas para tu bono\"Deep-link a compra/redención",
+        "time": "Email Urgencia ",
+        "message": "Hola [Nombre] realizas compras y te daremos un bono especial",
+        "template": "",
+        "_w": 179,
+        "intentType": "Bono",
+        "_rich_subtitle": "Últimas 48 horas para tu bono\"Deep-link a compra/redención",
+        "_rich_message": "Hola [Nombre] realizas compras y te daremos un bono especial"
+      }
+    },
+    {
+      "id": 92,
+      "type": "whatsapp",
+      "x": 304.16206594305083,
+      "y": 717.1020115812553,
+      "data": {
+        "title": "WhatsApp ",
+        "subtitle": "Descarga la app → reclama tu bono\n\"Beneficio: Bonos + experiencia mejorada Link: App Store/Play Store + referencia",
+        "time": "",
+        "message": "Descarga ya la aplicacion de terpel y reclama tu bono",
+        "template": "",
+        "_w": 169.5121951219512,
+        "intentType": "Bono",
+        "_rich_subtitle": "Descarga la app → reclama tu bono<br>\"Beneficio: Bonos + experiencia mejorada Link: App Store/Play Store + referencia",
+        "_rich_message": "Descarga ya la aplicacion de terpel y reclama tu bono"
+      }
+    },
+    {
+      "id": 93,
+      "type": "whatsapp",
+      "x": 1409.73634555386,
+      "y": 1038.2703338456884,
+      "data": {
+        "title": "Recordatorio",
+        "subtitle": "Se le recuerda al usuario que tiene un bono pendiente",
+        "time": "",
+        "message": "Recuerda que tienes un bono pendiente por reclamar solo debes entrar a la app y realizar una compra",
+        "template": "",
+        "_w": 161.41463414634146,
+        "intentType": "Bono",
+        "_rich_subtitle": "Se le recuerda al usuario que tiene un bono pendiente",
+        "_rich_message": "Recuerda que tienes un bono pendiente por reclamar solo debes entrar a la app y realizar una compra"
+      }
+    },
+    {
+      "id": 95,
+      "type": "push",
+      "x": 507.40944797842917,
+      "y": 1085.1964764633854,
+      "data": {
+        "title": "Bono confirmado",
+        "subtitle": "Invitación a programa de lealta:\nLa idea es identificar tipos de compradores\nEl usuario recibe un email de felicitaciones sigue atebnto en los proximos meses que tenemos muchas sopresas para ti",
+        "intentType": "Bono",
+        "_rich_subtitle": "Invitación a programa de lealta:<br>La idea es identificar tipos de compradores<br>El usuario recibe un email de felicitaciones sigue atebnto en los proximos meses que tenemos muchas sopresas para ti",
+        "time": "",
+        "message": "",
+        "_rich_message": "",
+        "_w": 214.5865566655139
+      }
+    },
+    {
+      "id": 96,
+      "type": "push",
+      "x": 1405.4349050914996,
+      "y": 856.193990070066,
+      "data": {
+        "title": "Recordatorio de Bono",
+        "subtitle": "Se le recuerda al usuario que tiene un bono pendiente",
+        "intentType": "Bono",
+        "_rich_subtitle": "Se le recuerda al usuario que tiene un bono pendiente",
+        "time": "",
+        "message": "",
+        "_rich_message": "",
+        "_w": 171.2661825697777
+      }
+    },
+    {
+      "id": 97,
+      "type": "push",
+      "x": 2068.4630463245144,
+      "y": 147.60514473785702,
+      "data": {
+        "title": "Bono confirmado",
+        "subtitle": "Felicitaciones sigue atento en los proximos meses que tenemos muchas sopresas para ti",
+        "intentType": "Bono",
+        "_rich_subtitle": "Felicitaciones sigue atento en los proximos meses que tenemos muchas sopresas para ti",
+        "time": "",
+        "message": "",
+        "_rich_message": "",
+        "_w": 211.27652359630548
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1779206792801",
+      "from": 51,
+      "to": 52,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "labelOffX": 1,
+      "labelOffY": -25
+    },
+    {
+      "id": "c1779206857779",
+      "from": 51,
+      "to": 3,
+      "label": "NO",
+      "color": "#c23934",
+      "dashed": true
+    },
+    {
+      "id": "c1779207068249",
+      "from": 3,
+      "to": 53,
+      "label": "SI",
+      "color": "#04844b",
+      "dashed": true
+    },
+    {
+      "id": "c1779207161299",
+      "from": 53,
+      "to": 55,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779207388464",
+      "from": 1,
+      "to": 51,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779207412064",
+      "from": 55,
+      "to": 56,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779207931531",
+      "from": 61,
+      "to": 63,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true
+    },
+    {
+      "id": "c1779207948464",
+      "from": 60,
+      "to": 61,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779208209329",
+      "from": 63,
+      "to": 66,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779208212846",
+      "from": 66,
+      "to": 64,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779208250412",
+      "from": 63,
+      "to": 67,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779208283695",
+      "from": 67,
+      "to": 68,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779208561244",
+      "from": 68,
+      "to": 73,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true,
+      "labelOffX": 0,
+      "labelOffY": 5
+    },
+    {
+      "id": "c1779209190256",
+      "from": 77,
+      "to": 78,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779209686055",
+      "from": 56,
+      "to": 81,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12,
+      "strokeWidth": 2,
+      "lineStyle": "elbow",
+      "dashStyle": "dashed",
+      "arrowType": "end"
+    },
+    {
+      "id": "c1779209872971",
+      "from": 61,
+      "to": 81,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": -35,
+      "labelOffY": 41,
+      "strokeWidth": 2,
+      "lineStyle": "elbow",
+      "dashStyle": "dashed",
+      "arrowType": "end"
+    },
+    {
+      "id": "c1779210131886",
+      "from": 78,
+      "to": 83,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true
+    },
+    {
+      "id": "c1779210269838",
+      "from": 83,
+      "to": 84,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779210459499",
+      "from": 84,
+      "to": 85,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779210581915",
+      "from": 85,
+      "to": 81,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 11,
+      "labelOffY": -182,
+      "strokeWidth": 2,
+      "lineStyle": "elbow",
+      "dashStyle": "dashed",
+      "arrowType": "end"
+    },
+    {
+      "id": "c1779210983762",
+      "from": 88,
+      "to": 89,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779211100495",
+      "from": 89,
+      "to": 90,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true
+    },
+    {
+      "id": "c1779231872347",
+      "from": 56,
+      "to": 91,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true,
+      "labelOffX": -3,
+      "labelOffY": 16
+    },
+    {
+      "id": "c1779231884896",
+      "from": 91,
+      "to": 60,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779232009563",
+      "from": 3,
+      "to": 92,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true,
+      "labelOffX": 0,
+      "labelOffY": 21
+    },
+    {
+      "id": "c1779232012196",
+      "from": 92,
+      "to": 77,
+      "label": "",
+      "color": "#888",
+      "dashed": false
+    },
+    {
+      "id": "c1779927535963",
+      "from": 64,
+      "to": 68,
+      "label": "",
+      "color": "#888888",
+      "dashed": false,
+      "lineStyle": "elbow",
+      "dashStyle": "solid",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927722368",
+      "from": 78,
+      "to": 95,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "lineStyle": "curve",
+      "dashStyle": "dashed",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": 23
+    },
+    {
+      "id": "c1779927729590",
+      "from": 95,
+      "to": 80,
+      "label": "",
+      "color": "#888",
+      "dashed": false,
+      "lineStyle": "curve",
+      "dashStyle": "solid",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927791849",
+      "from": 85,
+      "to": 96,
+      "label": "No",
+      "color": "#c23934",
+      "dashed": true,
+      "lineStyle": "curve",
+      "dashStyle": "dashed",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927796216",
+      "from": 96,
+      "to": 93,
+      "label": "",
+      "color": "#888888",
+      "dashed": false,
+      "lineStyle": "straight",
+      "dashStyle": "solid",
+      "arrowType": "none",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927810483",
+      "from": 96,
+      "to": 88,
+      "label": "",
+      "color": "#888",
+      "dashed": false,
+      "lineStyle": "curve",
+      "dashStyle": "solid",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927872833",
+      "from": 68,
+      "to": 97,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "lineStyle": "curve",
+      "dashStyle": "dashed",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927879866",
+      "from": 97,
+      "to": 71,
+      "label": "",
+      "color": "#888",
+      "dashed": false,
+      "lineStyle": "curve",
+      "dashStyle": "solid",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927886899",
+      "from": 81,
+      "to": 97,
+      "label": "",
+      "color": "#888888",
+      "dashed": false,
+      "lineStyle": "elbow",
+      "dashStyle": "solid",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    },
+    {
+      "id": "c1779927970566",
+      "from": 89,
+      "to": 97,
+      "label": "Si",
+      "color": "#04844b",
+      "dashed": true,
+      "lineStyle": "elbow",
+      "dashStyle": "dashed",
+      "arrowType": "end",
+      "strokeWidth": 2,
+      "labelFontSize": 9,
+      "labelPos": 50,
+      "labelOffX": 0,
+      "labelOffY": -12
+    }
+  ],
+  "textBoxes": [],
+  "connWaypoints": {
+    "c1779210002003": [
+      {
+        "x": 2024.3902439024391,
+        "y": 542.6829268292684
+      },
+      {
+        "x": 2152.439024390244,
+        "y": 104.87804878048782
+      }
+    ],
+    "c1779210581915": [
+      {
+        "x": 1193.3527623351479,
+        "y": 518.3988035985743
+      },
+      {
+        "x": 1336.4513327437596,
+        "y": 518.2845754549844
+      },
+      {
+        "x": 1415.3117750909983,
+        "y": 517.7179477312251
+      },
+      {
+        "x": 1460.9291182033971,
+        "y": 517.0370918638758
+      }
+    ],
+    "c1779209872971": [
+      {
+        "x": 1293.6003615159436,
+        "y": 387.83244959484335
+      },
+      {
+        "x": 1480.6390415021106,
+        "y": 396.2252108762739
+      }
+    ],
+    "c1779927535963": [
+      {
+        "x": 1925.4553894179305,
+        "y": 330.2820865221766
+      }
+    ],
+    "c1779927584913": [
+      {
+        "x": 2015.3778317189722,
+        "y": 522.1166300977324
+      }
+    ],
+    "c1779211048079": [
+      {
+        "x": 2186.829955039625,
+        "y": 538.9021526605935
+      }
+    ],
+    "c1779927886899": [
+      {
+        "x": 1860.7112309611803,
+        "y": 522.1166300977324
+      },
+      {
+        "x": 2194.0237504237084,
+        "y": 524.5145618924267
+      },
+      {
+        "x": 2186.829955039625,
+        "y": 343.47071139299607
+      },
+      {
+        "x": 2188.028920936972,
+        "y": 257.145166783996
+      },
+      {
+        "x": 2188.028920936972,
+        "y": 213.98239447949595
+      }
+    ],
+    "c1779927928616": [
+      {
+        "x": 2098.1064786359307,
+        "y": 534.1062890712045
+      },
+      {
+        "x": 2102.9023422253194,
+        "y": 342.2717454956489
+      },
+      {
+        "x": 2099.3054445332778,
+        "y": 255.94620088664877
+      }
+    ],
+    "c1779927970566": [
+      {
+        "x": 2020.173695308361,
+        "y": 530.5093913791629
+      },
+      {
+        "x": 2098.1064786359307,
+        "y": 530.5093913791629
+      },
+      {
+        "x": 2102.9023422253194,
+        "y": 373.44485882667664
+      },
+      {
+        "x": 2102.9023422253194,
+        "y": 290.71621190971825
+      },
+      {
+        "x": 2104.1013081226665,
+        "y": 245.15550781052377
+      }
+    ]
+  },
+  "nodeLabelOffsets": {
+    "1": {
+      "dx": -7.3170731707317085,
+      "dy": 103.60975609756098
+    },
+    "3": {
+      "dx": -2.3599152208474328,
+      "dy": -69.75440457593058
+    },
+    "51": {
+      "dx": -2.3599152208474328,
+      "dy": -67.39448935508312
+    },
+    "56": {
+      "dx": -139.23499802999854,
+      "dy": 19.255639952782843
+    },
+    "61": {
+      "dx": 0,
+      "dy": -69.75440457593058
+    },
+    "68": {
+      "dx": 19.031388062167515,
+      "dy": 188.8654032630219
+    },
+    "73": {
+      "dx": -1.1989658973472233,
+      "dy": -81.46246434718068
+    },
+    "78": {
+      "dx": -117.99576104237164,
+      "dy": 48.241356466441076
+    }
+  },
+  "title": "Journey Usuarios inativos 6 meses",
+  "meta": {
+    "saved": "2026-05-28T00:36:26.462Z",
+    "journeyMeta": {
+      "audiencia": "~~800,000 contactos",
+      "duracion": "11 días",
+      "canales": "WhatsApp, Push, App Banner",
+      "estrategia": "WhatsApp directo"
+    }
+  }
+}

@@ -118,6 +118,27 @@
         background: #fff;
         color: var(--sf-blue);
       }
+      .io-menu-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: #fff;
+        border: none;
+        border-bottom: 1px solid #f1f5f9;
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1e293b;
+        cursor: pointer;
+        transition: background 0.12s;
+      }
+      .io-menu-item:last-child {
+        border-bottom: none;
+      }
+      .io-menu-item:hover {
+        background: #eff6ff;
+        color: var(--sf-blue);
+      }
       .btn-green {
         background: var(--sf-green);
         color: #fff;
@@ -3420,7 +3441,24 @@
         </div>
       </div>
       <div class="tb-right">
-        <span class="tb-status"><span class="status-dot"></span>BORRADOR</span>
+        <select
+          id="flujos-activos-select"
+          onchange="loadFlowFromGithub(this.value)"
+          title="Flujos activos guardados en el repositorio"
+          style="
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 10px;
+            cursor: pointer;
+            max-width: 170px;
+          "
+        >
+          <option value="">📂 Flujos Activos…</option>
+        </select>
         <button
           class="btn btn-ghost"
           id="btn-connect-mode"
@@ -3453,21 +3491,64 @@
         >
           ◀ Panel
         </button>
-        <button
-          class="btn btn-img"
-          onclick="exportPNG()"
-          title="Exportar imagen PNG"
+        <div
+          style="position: relative; display: inline-block"
+          id="io-menu-wrap"
         >
-          📷 Exportar PNG
-        </button>
-        <button
-          class="btn btn-white"
-          id="btn-export-json"
-          onclick="saveFlow()"
-          title="Descargar el journey como archivo JSON"
-        >
-          ⬇️ Exportar JSON
-        </button>
+          <button
+            class="btn btn-white"
+            id="io-menu-btn"
+            onclick="toggleIoMenu(event)"
+            title="Exportar e importar"
+            style="display: flex; align-items: center; gap: 4px"
+          >
+            🔄 Exportar / Importar ▾
+          </button>
+          <div
+            id="io-menu"
+            style="
+              display: none;
+              position: absolute;
+              top: calc(100% + 4px);
+              left: 0;
+              background: #fff;
+              border: 1px solid #d1d5db;
+              border-radius: 8px;
+              box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+              z-index: 4000;
+              min-width: 190px;
+              overflow: hidden;
+            "
+          >
+            <button
+              class="io-menu-item"
+              onclick="
+                exportPNG();
+                closeIoMenu();
+              "
+            >
+              📷 Exportar PNG
+            </button>
+            <button
+              class="io-menu-item"
+              onclick="
+                saveFlow();
+                closeIoMenu();
+              "
+            >
+              ⬇️ Exportar JSON
+            </button>
+            <button
+              class="io-menu-item"
+              onclick="
+                triggerImportJSON();
+                closeIoMenu();
+              "
+            >
+              📂 Importar JSON
+            </button>
+          </div>
+        </div>
         <button
           class="btn btn-green"
           id="btn-save"
@@ -3483,13 +3564,6 @@
           title="Ver el historial de versiones guardadas"
         >
           🕘 Historial
-        </button>
-        <button
-          class="btn btn-load"
-          onclick="triggerImportJSON()"
-          title="Importar un JSON guardado previamente"
-        >
-          📂 Importar JSON
         </button>
         <input
           type="file"
@@ -3919,66 +3993,85 @@
               border-radius: 8px;
               padding: 8px 12px;
               box-sizing: border-box;
-              align-items: center;
+              flex-direction: column;
               gap: 8px;
               flex-shrink: 0;
             "
           >
-            <span style="font-size: 14px">🖼</span>
-            <div style="flex: 1; min-width: 0">
-              <div style="font-size: 11px; font-weight: 700; color: #1d4ed8">
-                Imagen del beneficio
+            <div style="display: flex; align-items: center; gap: 8px">
+              <span style="font-size: 14px">🖼</span>
+              <div style="flex: 1; min-width: 0">
+                <div style="font-size: 11px; font-weight: 700; color: #1d4ed8">
+                  Imagen del beneficio
+                </div>
+                <div
+                  style="
+                    font-size: 10px;
+                    color: #6b7280;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                  id="pm-img-label"
+                >
+                  Sube/elige una imagen
+                </div>
               </div>
-              <div
+              <label
                 style="
+                  background: #2563eb;
+                  color: #fff;
                   font-size: 10px;
-                  color: #6b7280;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
+                  font-weight: 700;
+                  padding: 5px 10px;
+                  border-radius: 6px;
+                  cursor: pointer;
+                  flex-shrink: 0;
                 "
-                id="pm-img-label"
               >
-                Sube una imagen para el botón "Ver beneficio"
-              </div>
+                📤 Cargar
+                <input
+                  type="file"
+                  accept="image/*"
+                  style="display: none"
+                  onchange="pmUploadBenefitImage(this)"
+                />
+              </label>
+              <button
+                id="pm-img-clear-btn"
+                onclick="pmClearBenefitImage()"
+                style="
+                  display: none;
+                  background: #fee2e2;
+                  color: #c23934;
+                  border: none;
+                  border-radius: 6px;
+                  padding: 5px 8px;
+                  font-size: 10px;
+                  font-weight: 700;
+                  cursor: pointer;
+                "
+              >
+                ✕
+              </button>
             </div>
-            <label
+            <!-- Desplegable de imágenes del repositorio (carpeta Imagenes/) -->
+            <select
+              id="pm-img-gh-select"
+              onchange="pmSelectGithubImage(this.value)"
               style="
-                background: #2563eb;
-                color: #fff;
+                width: 100%;
                 font-size: 10px;
-                font-weight: 700;
-                padding: 5px 10px;
-                border-radius: 6px;
-                cursor: pointer;
-                flex-shrink: 0;
-              "
-            >
-              📤 Cargar
-              <input
-                type="file"
-                accept="image/*"
-                style="display: none"
-                onchange="pmUploadBenefitImage(this)"
-              />
-            </label>
-            <button
-              id="pm-img-clear-btn"
-              onclick="pmClearBenefitImage()"
-              style="
-                display: none;
-                background: #fee2e2;
-                color: #c23934;
-                border: none;
-                border-radius: 6px;
                 padding: 5px 8px;
-                font-size: 10px;
-                font-weight: 700;
-                cursor: pointer;
+                border: 1px solid #bfdbfe;
+                border-radius: 6px;
+                background: #fff;
+                color: #334155;
+                box-sizing: border-box;
               "
             >
-              ✕
-            </button>
+              <option value="">📁 Elegir de la carpeta Imágenes…</option>
+            </select>
           </div>
           <!-- Objetivo del mensaje: texto que aparece en la franja "Objetivo"
                de la vista previa (independiente de la Descripción) -->
@@ -8121,6 +8214,9 @@
           ? `<span style="vertical-align:middle;margin-right:4px">${t.iconHTML}</span>${selectedNode.data.title || t.label}`
           : `${t.icon} ${selectedNode.data.title || t.label}`;
         refreshNodeEl(selectedNode);
+        // Confirmar la imagen pendiente (solo se aplica al pulsar Aplicar).
+        if (typeof _pmCommitPendingImage === "function")
+          _pmCommitPendingImage(selectedNode);
         _buildNodeExternalLabels(selectedNode);
         renderConnections();
         clearDirty();
@@ -8155,11 +8251,155 @@
       const pmCustomHTML = {};
       // _pmBenefitImages: stores uploaded benefit image dataURLs per node
       const _pmBenefitImages = {};
+      // Imagen pendiente de aplicar para el nodo en edición. {nodeId, src, name}
+      let _pmPendingImage = null;
+
+      /* ════════════════════════════════
+         INTEGRACIÓN CON GITHUB
+         Lee imágenes (carpeta Imagenes/) y flujos (carpeta Json/) del repo,
+         para no sobrecargar el almacenamiento del navegador.
+      ════════════════════════════════ */
+      const GH_OWNER = "mediaantpack";
+      const GH_REPO = "Creacion_flujos";
+      const GH_BRANCH = "main";
+      const GH_IMAGES_DIR = "Imagenes";
+      const GH_JSON_DIR = "Json";
+      const _ghRaw = (path) =>
+        `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}`;
+      const _ghApi = (dir) =>
+        `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${dir}?ref=${GH_BRANCH}`;
+      let _ghImages = null; // cache [{name, url}]
+      let _ghJson = null; // cache [{name, url}]
+
+      async function _ghListDir(dir, exts) {
+        const res = await fetch(_ghApi(dir), {
+          headers: { Accept: "application/vnd.github+json" },
+        });
+        if (!res.ok) throw new Error("GitHub " + res.status);
+        const arr = await res.json();
+        return arr
+          .filter(
+            (f) =>
+              f.type === "file" &&
+              exts.some((e) => f.name.toLowerCase().endsWith(e)),
+          )
+          .map((f) => ({
+            name: f.name,
+            url: f.download_url || _ghRaw(dir + "/" + f.name),
+          }));
+      }
+
+      // Cargar lista de imágenes y poblar el desplegable.
+      async function _loadGithubImages() {
+        const sel = document.getElementById("pm-img-gh-select");
+        if (!sel) return;
+        try {
+          if (!_ghImages) {
+            _ghImages = await _ghListDir(GH_IMAGES_DIR, [
+              ".png",
+              ".jpg",
+              ".jpeg",
+              ".gif",
+              ".webp",
+            ]);
+          }
+          sel.innerHTML =
+            '<option value="">📁 Elegir de la carpeta Imágenes…</option>' +
+            _ghImages
+              .map((im) => `<option value="${im.url}">${im.name}</option>`)
+              .join("");
+        } catch (e) {
+          sel.innerHTML =
+            '<option value="">⚠ No se pudo leer la carpeta Imágenes</option>';
+        }
+      }
+
+      // Al elegir una imagen del repo: descargarla como dataURL y dejarla
+      // pendiente (se aplica al pulsar Aplicar, igual que una subida).
+      async function pmSelectGithubImage(url) {
+        if (!url) return;
+        const targetNode = pmNode || selectedNode;
+        if (!targetNode) return;
+        showNotif("⬇️ Cargando imagen del repositorio…");
+        try {
+          const res = await fetch(url);
+          const blob = await res.blob();
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const name = url.split("/").pop();
+            _pmSetPendingImage(targetNode, e.target.result, name);
+          };
+          reader.readAsDataURL(blob);
+        } catch (e) {
+          showNotif("⚠ No se pudo cargar la imagen seleccionada");
+        }
+      }
+
+      // ── Flujos Activos: lista los .json de la carpeta Json/ del repo ──
+      async function _loadGithubFlows() {
+        const sel = document.getElementById("flujos-activos-select");
+        if (!sel) return;
+        try {
+          if (!_ghJson) {
+            _ghJson = await _ghListDir(GH_JSON_DIR, [".json"]);
+          }
+          sel.innerHTML =
+            '<option value="">📂 Flujos Activos…</option>' +
+            _ghJson
+              .map(
+                (f) =>
+                  `<option value="${f.url}">${f.name.replace(/\.json$/i, "")}</option>`,
+              )
+              .join("");
+        } catch (e) {
+          sel.innerHTML = '<option value="">⚠ No se pudo leer Flujos</option>';
+        }
+      }
+
+      // Descarga el JSON elegido del repo y lo importa al editor.
+      async function loadFlowFromGithub(url) {
+        if (!url) return;
+        const sel = document.getElementById("flujos-activos-select");
+        if (_hasUnsavedChanges && _hasUnsavedChanges()) {
+          if (
+            !confirm(
+              "Tienes cambios sin guardar. ¿Cargar este flujo y reemplazar lo actual?",
+            )
+          ) {
+            if (sel) sel.value = "";
+            return;
+          }
+        }
+        showNotif("⬇️ Cargando flujo desde el repositorio…");
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          const restored =
+            typeof _rehydrateImages === "function"
+              ? _rehydrateImages(JSON.parse(JSON.stringify(data)))
+              : data;
+          const ok = _applyWorkspace(restored);
+          if (ok) {
+            const name = url
+              .split("/")
+              .pop()
+              .replace(/\.json$/i, "");
+            showNotif("✅ Flujo cargado: " + name);
+          }
+        } catch (e) {
+          showNotif("⚠ No se pudo cargar el flujo seleccionado");
+        }
+        if (sel) sel.value = "";
+      }
 
       /* Show/hide the preview button in detail panel */
       function renderDetailPreview(n) {
         const wrap = document.getElementById("dp-preview-wrap");
         if (!wrap) return;
+        // Al cambiar de nodo, descartar cualquier imagen pendiente del anterior.
+        if (_pmPendingImage && (!n || _pmPendingImage.nodeId !== n.id)) {
+          _pmPendingImage = null;
+        }
         const isMsg = PREVIEW_TYPES.has(n.type);
         wrap.style.display = isMsg ? "block" : "none";
         // Sync the image upload bar (now lives in the detail panel)
@@ -8339,58 +8579,90 @@
           _pmBenefitImages[n.id] = n.data.benefitImage;
         }
         bar.style.display = "flex";
-        const hasSrc = _pmBenefitImages[n.id];
-        document.getElementById("pm-img-label").textContent = hasSrc
-          ? "✅ Imagen cargada — se mostrará al hacer clic en los botones"
-          : n.type === "push"
-            ? 'Sube una imagen para el botón "Ver beneficio"'
-            : n.type === "email"
-              ? "Sube una imagen de encabezado para el email"
-              : n.type === "sms"
-                ? "Sube una imagen para mostrar al abrir el enlace"
-                : "Sube una imagen para los botones del mensaje";
+        // Poblar el desplegable de imágenes del repo (una vez).
+        const ghSel = document.getElementById("pm-img-gh-select");
+        if (ghSel && ghSel.options.length <= 1) _loadGithubImages();
+        const applied = !!_pmBenefitImages[n.id];
+        const hasPending = _pmPendingImage && _pmPendingImage.nodeId === n.id;
+        const pendingSrc = hasPending ? _pmPendingImage.src : null;
+        // Estado mostrado: pendiente tiene prioridad visual.
+        let label;
+        if (hasPending && pendingSrc) {
+          label = "🖼️ Imagen lista — pulsa Aplicar para confirmar";
+        } else if (hasPending && !pendingSrc) {
+          label = "🗑️ Se quitará al pulsar Aplicar";
+        } else if (applied) {
+          label = "✅ Imagen aplicada";
+        } else {
+          label =
+            n.type === "push"
+              ? 'Sube/elige una imagen para "Ver beneficio"'
+              : n.type === "email"
+                ? "Sube/elige una imagen de encabezado"
+                : n.type === "sms"
+                  ? "Sube/elige una imagen para el enlace"
+                  : "Sube/elige una imagen para los botones";
+        }
+        document.getElementById("pm-img-label").textContent = label;
         const clearBtn = document.getElementById("pm-img-clear-btn");
-        if (clearBtn) clearBtn.style.display = hasSrc ? "inline-flex" : "none";
+        if (clearBtn)
+          clearBtn.style.display =
+            applied || (hasPending && pendingSrc) ? "inline-flex" : "none";
       }
 
+      // Imagen pendiente de aplicar para el nodo en edición. {nodeId, src, name}
       function pmUploadBenefitImage(input) {
-        // El nodo objetivo es el del modal (pmNode) si está abierto, o el nodo
-        // seleccionado en el panel lateral. Antes solo usaba pmNode, por eso al
-        // cargar desde el panel no guardaba nada.
         const targetNode = pmNode || selectedNode;
         if (!targetNode || !input.files || !input.files[0]) {
           if (input) input.value = "";
           return;
         }
+        const file = input.files[0];
         const reader = new FileReader();
         reader.onload = function (e) {
-          _pmBenefitImages[targetNode.id] = e.target.result;
-          // Persistir también en el dato del nodo para que sobreviva a
-          // cambios de pestaña / guardados / reaperturas.
-          targetNode.data = targetNode.data || {};
-          targetNode.data.benefitImage = e.target.result;
-          _pmUpdateImgBar(targetNode);
-          // Re-render del preview si el modal está abierto
-          const pc = document.getElementById("pm-content");
-          if (pmNode && pc) pc.innerHTML = pmRenderWithVars(pmNode);
-          if (typeof setUnsavedExport === "function") setUnsavedExport();
-          if (typeof showNotif === "function")
-            showNotif("✅ Imagen del beneficio cargada");
-          // Reset para permitir volver a cargar la MISMA imagen otra vez.
+          _pmSetPendingImage(targetNode, e.target.result, file.name);
           input.value = "";
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(file);
+      }
+
+      // Establece la imagen como PENDIENTE (no se aplica al nodo hasta pulsar
+      // "Aplicar"). Marca el panel como dirty para que avise al cerrar.
+      function _pmSetPendingImage(node, src, name) {
+        _pmPendingImage = { nodeId: node.id, src, name: name || "imagen" };
+        _pmUpdateImgBar(node);
+        if (typeof markDirty === "function") markDirty();
+        if (typeof showNotif === "function")
+          showNotif("🖼️ Imagen lista — pulsa Aplicar para confirmar");
       }
 
       function pmClearBenefitImage() {
         const targetNode = pmNode || selectedNode;
         if (!targetNode) return;
-        delete _pmBenefitImages[targetNode.id];
-        if (targetNode.data) delete targetNode.data.benefitImage;
+        // Si hay una imagen pendiente, solo se cancela la pendiente.
+        if (_pmPendingImage && _pmPendingImage.nodeId === targetNode.id) {
+          _pmPendingImage = null;
+        } else {
+          // Quitar la imagen aplicada (queda pendiente de confirmar con Aplicar).
+          _pmPendingImage = { nodeId: targetNode.id, src: "", name: "" };
+        }
         _pmUpdateImgBar(targetNode);
-        const pc = document.getElementById("pm-content");
-        if (pmNode && pc) pc.innerHTML = pmRenderWithVars(pmNode);
-        if (typeof setUnsavedExport === "function") setUnsavedExport();
+        if (typeof markDirty === "function") markDirty();
+      }
+
+      // Confirma la imagen pendiente sobre el nodo (llamado desde applyPanel).
+      function _pmCommitPendingImage(node) {
+        if (!node || !_pmPendingImage || _pmPendingImage.nodeId !== node.id)
+          return;
+        node.data = node.data || {};
+        if (_pmPendingImage.src) {
+          _pmBenefitImages[node.id] = _pmPendingImage.src;
+          node.data.benefitImage = _pmPendingImage.src;
+        } else {
+          delete _pmBenefitImages[node.id];
+          delete node.data.benefitImage;
+        }
+        _pmPendingImage = null;
       }
 
       /* Open benefit image in a lightbox */
@@ -8751,7 +9023,15 @@
       }
       function _doExportJSON() {
         const data = _buildAllJourneysData();
-        localStorage.setItem("jb_flow", JSON.stringify(data));
+        // Guardar el estado actual en localStorage es opcional; si la imagen es
+        // muy pesada puede exceder la cuota, pero la descarga del archivo SIEMPRE
+        // debe funcionar. Por eso va protegido y sin imágenes en localStorage.
+        try {
+          const { data: lightData } = _dedupeImages(data);
+          localStorage.setItem("jb_flow", JSON.stringify(lightData));
+        } catch (e) {
+          /* sin espacio: no pasa nada, el archivo se descarga igual */
+        }
         const a = document.createElement("a");
         a.href =
           "data:application/json," +
@@ -8792,6 +9072,92 @@
         }
       }
 
+      /* ── Deduplicación de imágenes en el historial ──
+         Las imágenes (benefitImage) son pesadas (~400KB). Si se guardan dentro
+         de cada versión, 18 versiones desbordan localStorage. En su lugar las
+         guardamos UNA sola vez en un almacén compartido "jb_images" y dentro de
+         las versiones dejamos solo una referencia "img:HASH". */
+      const JB_IMAGES_KEY = "jb_images";
+
+      function _hashStr(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) {
+          h = (h << 5) - h + str.charCodeAt(i);
+          h |= 0;
+        }
+        return "img_" + (h >>> 0).toString(36) + "_" + str.length;
+      }
+      function _loadImageStore() {
+        try {
+          const raw = localStorage.getItem(JB_IMAGES_KEY);
+          return raw ? JSON.parse(raw) : {};
+        } catch (e) {
+          return {};
+        }
+      }
+      function _saveImageStore(store) {
+        try {
+          localStorage.setItem(JB_IMAGES_KEY, JSON.stringify(store));
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+      // Recorre el workspace, mueve cada imagen al almacén y la reemplaza por
+      // su referencia. Devuelve {data, store} listos para guardar.
+      function _dedupeImages(data) {
+        const store = _loadImageStore();
+        const clone = JSON.parse(JSON.stringify(data));
+        (clone.journeys || []).forEach((j) => {
+          const ns = (j.state && j.state.nodes) || [];
+          ns.forEach((nd) => {
+            const img = nd.data && nd.data.benefitImage;
+            if (img && typeof img === "string" && img.startsWith("data:")) {
+              const key = _hashStr(img);
+              store[key] = img;
+              nd.data.benefitImage = key; // referencia ligera
+            }
+          });
+        });
+        return { data: clone, store };
+      }
+      // Inverso: reemplaza las referencias "img_*" por la imagen real.
+      function _rehydrateImages(data) {
+        const store = _loadImageStore();
+        (data.journeys || []).forEach((j) => {
+          const ns = (j.state && j.state.nodes) || [];
+          ns.forEach((nd) => {
+            const ref = nd.data && nd.data.benefitImage;
+            if (ref && typeof ref === "string" && ref.startsWith("img_")) {
+              if (store[ref]) nd.data.benefitImage = store[ref];
+            }
+          });
+        });
+        return data;
+      }
+      // Elimina del almacén las imágenes que ya no use ninguna versión.
+      function _gcImageStore(history) {
+        const used = new Set();
+        history.forEach((v) => {
+          (v.data?.journeys || []).forEach((j) => {
+            ((j.state && j.state.nodes) || []).forEach((nd) => {
+              const ref = nd.data && nd.data.benefitImage;
+              if (ref && typeof ref === "string" && ref.startsWith("img_"))
+                used.add(ref);
+            });
+          });
+        });
+        const store = _loadImageStore();
+        let changed = false;
+        Object.keys(store).forEach((k) => {
+          if (!used.has(k)) {
+            delete store[k];
+            changed = true;
+          }
+        });
+        if (changed) _saveImageStore(store);
+      }
+
       function _writeHistory(arr) {
         try {
           localStorage.setItem(JB_HISTORY_KEY, JSON.stringify(arr));
@@ -8803,32 +9169,46 @@
             arr.shift();
             try {
               localStorage.setItem(JB_HISTORY_KEY, JSON.stringify(arr));
+              _gcImageStore(arr);
               return true;
             } catch (e2) {
               /* seguir podando */
             }
           }
-          showNotif("⚠ No hay espacio para guardar más versiones");
-          return false;
+          // Último intento: guardar solo la versión más reciente.
+          try {
+            localStorage.setItem(JB_HISTORY_KEY, JSON.stringify(arr));
+            _gcImageStore(arr);
+            return true;
+          } catch (e3) {
+            showNotif(
+              "⚠ La imagen es muy pesada para el historial. El JSON exportado sí la conserva.",
+            );
+            return false;
+          }
         }
       }
 
       function saveToTool() {
-        const data = _buildAllJourneysData();
+        const dataFull = _buildAllJourneysData();
         const history = _loadHistory();
 
-        const totalNodes = data.journeys.reduce(
+        const totalNodes = dataFull.journeys.reduce(
           (sum, j) => sum + ((j.state && j.state.nodes) || []).length,
           0,
         );
 
+        // Deduplicar imágenes: se guardan aparte y la versión solo lleva refs.
+        const { data: dataLight, store } = _dedupeImages(dataFull);
+        _saveImageStore(store);
+
         const version = {
           id: "v_" + Date.now(),
           savedAt: new Date().toISOString(),
-          tabCount: data.journeys.length,
-          titles: data.journeys.map((j) => j.title),
+          tabCount: dataLight.journeys.length,
+          titles: dataLight.journeys.map((j) => j.title),
           nodeCount: totalNodes,
-          data: data,
+          data: dataLight,
         };
 
         history.push(version);
@@ -8836,18 +9216,21 @@
         while (history.length > JB_HISTORY_MAX) history.shift();
 
         const ok = _writeHistory(history);
+        // Limpiar imágenes huérfanas tras podar
+        _gcImageStore(history);
         if (!ok) return;
 
-        // Guardar también como estado "actual" para recarga
+        // Guardar también como estado "actual" para recarga. Usamos la versión
+        // deduplicada (con referencias) para no exceder la cuota.
         try {
-          localStorage.setItem("jb_flow", JSON.stringify(data));
+          localStorage.setItem("jb_flow", JSON.stringify(dataLight));
         } catch (e) {}
 
         clearUnsavedExport();
         _updateSaveMeta(version.savedAt);
         showNotif(
           "💾 Guardado · " +
-            data.journeys.length +
+            dataLight.journeys.length +
             " pestaña(s) · versión #" +
             history.length,
         );
@@ -9062,7 +9445,9 @@
         )
           return;
 
-        const ok = _applyWorkspace(v.data);
+        // Rehidratar las imágenes (las versiones guardan solo referencias).
+        const restored = _rehydrateImages(JSON.parse(JSON.stringify(v.data)));
+        const ok = _applyWorkspace(restored);
         if (!ok) return;
         closeHistoryModal();
         showNotif("↩ Versión restaurada · " + tabCount + " pestaña(s)");
@@ -9265,6 +9650,23 @@
       }
 
       let _hasUnsaved = false;
+      /* ── Menú desplegable Exportar / Importar ── */
+      function toggleIoMenu(ev) {
+        if (ev) ev.stopPropagation();
+        const m = document.getElementById("io-menu");
+        if (!m) return;
+        m.style.display = m.style.display === "block" ? "none" : "block";
+      }
+      function closeIoMenu() {
+        const m = document.getElementById("io-menu");
+        if (m) m.style.display = "none";
+      }
+      // Cerrar al hacer clic fuera del menú.
+      document.addEventListener("click", function (e) {
+        const wrap = document.getElementById("io-menu-wrap");
+        if (wrap && !wrap.contains(e.target)) closeIoMenu();
+      });
+
       function setUnsavedExport() {
         _hasUnsaved = true;
         document.getElementById("unsaved-dot").style.display = "block";
@@ -10807,6 +11209,10 @@
         const h = _loadHistory();
         if (h.length) _updateSaveMeta(h[h.length - 1].savedAt);
       })();
+      // Poblar el desplegable "Flujos Activos" desde el repositorio.
+      try {
+        _loadGithubFlows();
+      } catch (e) {}
       // Wire preview modal overlay click (DOM is ready here)
       const _pmOv = document.getElementById("preview-modal-overlay");
       if (_pmOv)

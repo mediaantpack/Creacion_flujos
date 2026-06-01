@@ -1907,15 +1907,77 @@
         );
         pointer-events: none;
       }
-      .push-statusbar {
+      /* Capas dentro de la pantalla del teléfono push */
+      .push-lock-layer {
         width: 100%;
+        flex: 1;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
-        padding: 8px 16px 0;
-        font-size: 9px;
+        z-index: 2;
+      }
+      .push-app-layer {
+        position: absolute;
+        inset: 0;
+        background: #f4f5f7;
+        border-radius: 28px;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+        overflow: hidden;
+        animation: pushAppIn 0.22s ease;
+      }
+      @keyframes pushAppIn {
+        from { transform: translateX(18%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      .push-app-topbar {
+        background: #e8001d;
+        padding: 12px 12px;
+        padding-top: 16px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+      }
+      .push-app-back {
+        color: #fff;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0 2px;
         font-weight: 700;
-        color: rgba(255, 255, 255, 0.85);
+      }
+      .push-app-logo-dot {
+        width: 24px; height: 24px; border-radius: 50%;
+        background: #fff; color: #e8001d; font-weight: 800;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 12px; flex-shrink: 0;
+      }
+      .push-app-logo { color: #fff; font-weight: 800; font-size: 14px; }
+      .push-app-chip {
+        margin-left: auto; background: #ffd000; color: #1a1a1a;
+        font-size: 9px; font-weight: 800; padding: 3px 9px; border-radius: 12px;
+        white-space: nowrap;
+      }
+      .push-app-body {
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+        background: #f4f5f7;
+      }
+      .push-app-section {
+        font-size: 10px; font-weight: 700; color: #888;
+        text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px;
+      }
+      .push-app-img {
+        width: 100%; border-radius: 12px; display: block;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      }
+      .push-app-nav {
+        display: flex; background: #fff;
+        border-top: 1px solid #e5e7eb; padding: 9px 0 12px;
+        flex-shrink: 0;
       }
       .push-statusbar-icons {
         display: flex;
@@ -2052,6 +2114,229 @@
         text-align: center;
         margin-top: 10px;
         margin-bottom: 6px;
+      }
+
+      /* — WhatsApp phone mockup (chat interface inside a phone) — */
+      .wam-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 0 0;
+      }
+      .wam-shell {
+        width: 260px;
+        background: #1a1a22;
+        border-radius: 38px;
+        padding: 10px;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          0 20px 50px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        position: relative;
+      }
+      .wam-shell::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 22px;
+        background: #1a1a22;
+        border-radius: 14px;
+        z-index: 6;
+      }
+      .wam-screen {
+        background: #e5ddd5;
+        border-radius: 30px;
+        overflow: hidden;
+        height: 480px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      /* WhatsApp top bar */
+      .wam-topbar {
+        background: #075e54;
+        color: #fff;
+        padding: 30px 12px 8px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        flex-shrink: 0;
+      }
+      .wam-back {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .wam-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #e8001d;
+        color: #fff;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      .wam-cname {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .wam-cstatus {
+        font-size: 10px;
+        opacity: 0.8;
+      }
+      .wam-topicons {
+        margin-left: auto;
+        display: flex;
+        gap: 14px;
+        font-size: 15px;
+        opacity: 0.9;
+      }
+      /* Chat body with WhatsApp wallpaper */
+      .wam-body {
+        flex: 1;
+        background-color: #e5ddd5;
+        background-image: radial-gradient(
+          rgba(0, 0, 0, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 14px 14px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+      }
+      .wam-daystamp {
+        align-self: center;
+        background: #d9e7d6;
+        color: #54656f;
+        font-size: 9px;
+        padding: 3px 10px;
+        border-radius: 8px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2px;
+      }
+      .wam-bubble {
+        align-self: flex-start;
+        background: #fff;
+        border-radius: 0 8px 8px 8px;
+        padding: 7px 9px 5px;
+        max-width: 82%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
+        position: relative;
+      }
+      .wam-bubble::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -6px;
+        border-width: 0 6px 7px 0;
+        border-style: solid;
+        border-color: transparent #fff transparent transparent;
+      }
+      .wam-bimg {
+        width: 100%;
+        border-radius: 6px;
+        margin-bottom: 5px;
+        display: block;
+        max-height: 130px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      .wam-btitle {
+        font-weight: 700;
+        font-size: 12px;
+        color: #111b21;
+        margin-bottom: 2px;
+      }
+      .wam-btext {
+        font-size: 12px;
+        color: #111b21;
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .wam-bsecondary {
+        font-size: 11px;
+        color: #54656f;
+        line-height: 1.4;
+        margin-top: 5px;
+      }
+      .wam-btime {
+        font-size: 9px;
+        color: #8696a0;
+        text-align: right;
+        margin-top: 3px;
+      }
+      .wam-btime span {
+        color: #53bdeb;
+      }
+      /* Quick-reply / CTA buttons (WhatsApp interactive) */
+      .wam-cta {
+        background: #fff;
+        border-top: 1px solid #e9edef;
+        color: #00a5f4;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 9px;
+        cursor: default;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .wam-cta:first-of-type {
+        border-radius: 0 0 8px 8px;
+      }
+      .wam-ctas {
+        align-self: flex-start;
+        width: 82%;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
+        margin-top: -2px;
+      }
+      .wam-ctas .wam-cta {
+        border-top: 1px solid #e9edef;
+      }
+      .wam-ctas .wam-cta:first-child {
+        border-top: none;
+      }
+      /* Input bar */
+      .wam-input {
+        background: #f0f0f0;
+        padding: 7px 9px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+      }
+      .wam-input-field {
+        flex: 1;
+        background: #fff;
+        border-radius: 20px;
+        padding: 7px 13px;
+        font-size: 11px;
+        color: #8696a0;
+      }
+      .wam-send {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #00a884;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
       }
       /* — legacy sidebar push stubs (keep for canvas mini-preview) — */
       .push-phone {
@@ -3277,6 +3562,49 @@
               ✕
             </button>
           </div>
+          <!-- Objetivo del mensaje: texto que aparece en la franja "Objetivo"
+               de la vista previa (independiente de la Descripción) -->
+          <div
+            id="dp-objective-wrap"
+            style="
+              display: none;
+              margin-top: 8px;
+              width: 100%;
+              background: #f0fdf4;
+              border: 1.5px solid #bbf7d0;
+              border-radius: 8px;
+              padding: 8px 12px;
+              box-sizing: border-box;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                font-weight: 700;
+                color: #166534;
+                margin-bottom: 5px;
+              "
+            >
+              🎯 Objetivo del mensaje
+            </div>
+            <textarea
+              id="fp-objective"
+              rows="2"
+              placeholder="¿Qué busca lograr este mensaje? (aparece en la vista previa)"
+              oninput="onObjectiveInput()"
+              style="
+                width: 100%;
+                border: 1px solid #bbf7d0;
+                border-radius: 6px;
+                padding: 6px 8px;
+                font-size: 11px;
+                font-family: inherit;
+                resize: vertical;
+                box-sizing: border-box;
+                outline: none;
+              "
+            ></textarea>
+          </div>
         </div>
         <div class="dp-footer">
           <button class="dp-del" onclick="deleteNode()">🗑 Eliminar</button>
@@ -4031,6 +4359,7 @@
             "subject",
             "from",
             "template",
+            "message",
           ],
           tooltip: "Envía un email al contacto en el momento configurado.",
         },
@@ -4232,6 +4561,11 @@
         from: { label: "Remitente", type: "text" },
         template: { label: "Plantilla / Template", type: "text" },
         message: { label: "Mensaje", type: "textarea" },
+        objective: {
+          label: "Objetivo del mensaje",
+          type: "textarea",
+          placeholder: "¿Qué busca lograr este mensaje?",
+        },
         senderId: { label: "Sender ID", type: "text" },
         condition: {
           label: "Condición",
@@ -6682,10 +7016,22 @@
           ? `<span style="vertical-align:middle;margin-right:4px">${t.iconHTML}</span>${n.data.title || t.label}`
           : `${t.icon} ${n.data.title || t.label}`;
         const fields = t.fields || ["title", "subtitle"];
+        // Etiqueta dinámica para el campo "Mensaje" según el canal del nodo.
+        const _msgLabelByType = {
+          whatsapp: "Mensaje de WhatsApp",
+          push: "Mensaje de Push",
+          email: "Mensaje de Email",
+          sms: "Mensaje de SMS",
+        };
         let html = "";
         fields.forEach((k) => {
           const m = FIELD_META[k];
           if (!m) return;
+          // Resolver la etiqueta a mostrar (label dinámico para "message").
+          const fieldLabel =
+            k === "message" && _msgLabelByType[n.type]
+              ? _msgLabelByType[n.type]
+              : m.label;
           const val = n.data[k] || "";
           if (m.type === "textarea") {
             const isRich = k === "subtitle" || k === "message";
@@ -6707,7 +7053,7 @@
                 ? `<button type="button" class="field-vis-btn${isHidden2 ? " hidden-vis" : ""}" id="fp-vis-${k}" title="${isHidden2 ? "Mostrar en canvas" : "Ocultar en canvas"}" onclick="toggleFieldVis('${k}', this)" style="${hasContent2 ? "" : "display:none"}">${isHidden2 ? "🙈" : "👁️"}</button>`
                 : "";
               html += `<div class="rtb-wrap${isHidden2 ? " field-group-hidden" : ""}" id="fg-${k}">
-  <div class="field-label"><span class="field-label-text">${m.label}</span>${eyeBtn2}</div>
+  <div class="field-label"><span class="field-label-text">${fieldLabel}</span>${eyeBtn2}</div>
   <div class="rtb-toolbar" id="rtb-${k}">
     <button type="button" class="rtb-btn" data-cmd="bold" data-field="${k}" title="Negrita"><b>B</b></button>
     <button type="button" class="rtb-btn" data-cmd="italic" data-field="${k}" title="Cursiva"><i>I</i></button>
@@ -6776,7 +7122,7 @@
   <textarea class="rtb-textarea" id="fp-${k}">${val}</textarea>
 </div>`;
             } else {
-              html += `<div class="field-group"><div class="field-label">${m.label}</div>
+              html += `<div class="field-group"><div class="field-label">${fieldLabel}</div>
         <textarea class="field-input" id="fp-${k}" rows="3">${val}</textarea></div>`;
             }
           } else if (m.type === "intent") {
@@ -6798,7 +7144,7 @@
               })
               .join("");
             html += `<div class="field-group">
-              <div class="field-label">${m.label}</div>
+              <div class="field-label">${fieldLabel}</div>
               <select class="field-input" id="fp-${k}-select" onchange="intentSelectChange(this,'${k}')">
                 <option value="">— Seleccionar —</option>
                 ${opts}
@@ -6814,7 +7160,7 @@
                 (o) => `<option${o === val ? " selected" : ""}>${o}</option>`,
               )
               .join("");
-            html += `<div class="field-group"><div class="field-label">${m.label}</div>
+            html += `<div class="field-group"><div class="field-label">${fieldLabel}</div>
         <select class="field-input" id="fp-${k}">${opts}</select></div>`;
           } else {
             const isVisToggle = k === "title" || k === "subtitle";
@@ -6823,7 +7169,7 @@
             const eyeBtn = isVisToggle
               ? `<button type="button" class="field-vis-btn${isHidden ? " hidden-vis" : ""}" id="fp-vis-${k}" title="${isHidden ? "Mostrar en canvas" : "Ocultar en canvas"}" onclick="toggleFieldVis('${k}', this)" style="${hasContent ? "" : "display:none"}">${isHidden ? "🙈" : "👁️"}</button>`
               : "";
-            html += `<div class="field-group${isHidden ? " field-group-hidden" : ""}" id="fg-${k}"><div class="field-label"><span class="field-label-text">${m.label}</span>${eyeBtn}</div>
+            html += `<div class="field-group${isHidden ? " field-group-hidden" : ""}" id="fg-${k}"><div class="field-label"><span class="field-label-text">${fieldLabel}</span>${eyeBtn}</div>
         <input class="field-input" id="fp-${k}" type="text" value="${val.replace(/"/g, "&quot;")}" placeholder="${m.placeholder || ""}" oninput="onFieldInput('${k}')"></div>`;
           }
         });
@@ -7374,9 +7720,30 @@
       function renderDetailPreview(n) {
         const wrap = document.getElementById("dp-preview-wrap");
         if (!wrap) return;
-        wrap.style.display = PREVIEW_TYPES.has(n.type) ? "block" : "none";
+        const isMsg = PREVIEW_TYPES.has(n.type);
+        wrap.style.display = isMsg ? "block" : "none";
         // Sync the image upload bar (now lives in the detail panel)
-        _pmUpdateImgBar(PREVIEW_TYPES.has(n.type) ? n : null);
+        _pmUpdateImgBar(isMsg ? n : null);
+        // Sync the "Objetivo del mensaje" field
+        const objWrap = document.getElementById("dp-objective-wrap");
+        const objInput = document.getElementById("fp-objective");
+        if (objWrap && objInput) {
+          // Solo para nodos de mensajería
+          const showObj =
+            isMsg && ["whatsapp", "push", "email", "sms"].includes(n.type);
+          objWrap.style.display = showObj ? "block" : "none";
+          if (showObj) objInput.value = n.data.objective || "";
+        }
+      }
+
+      // Guarda el objetivo en el nodo seleccionado al escribir.
+      function onObjectiveInput() {
+        if (!selectedNode) return;
+        const el = document.getElementById("fp-objective");
+        if (!el) return;
+        selectedNode.data.objective = el.value;
+        if (typeof markDirty === "function") markDirty();
+        if (typeof setUnsavedExport === "function") setUnsavedExport();
       }
 
       /* Get live field values from the open panel or node.data */
@@ -7403,6 +7770,7 @@
           "{{time}}": lv("time") || n.data.time || "",
           "{{template}}": lv("template") || clean(n.data.template) || "",
           "{{message}}": lv("message") || clean(n.data.message) || "",
+          "{{objective}}": lv("objective") || clean(n.data.objective) || "",
           "{{senderId}}": lv("senderId") || clean(n.data.senderId) || "",
           "{{placement}}": lv("placement") || clean(n.data.placement) || "",
           "{{formField}}": lv("formField") || clean(n.data.formField) || "",
@@ -7432,6 +7800,19 @@
         for (const [key, val] of Object.entries(vars)) {
           const k = key.replace(/[{}]/g, "");
           ln.data[k] = val;
+        }
+        // Conservar versiones enriquecidas (formato/saltos/emojis) y la imagen
+        // del beneficio, para que la vista previa respete el contenido del nodo.
+        if (n.data) {
+          [
+            "_rich_title",
+            "_rich_subtitle",
+            "_rich_message",
+            "_rich_subject",
+            "benefitImage",
+          ].forEach((rk) => {
+            if (n.data[rk]) ln.data[rk] = n.data[rk];
+          });
         }
         switch (n.type) {
           case "email":
@@ -7511,6 +7892,12 @@
           bar.style.display = "none";
           return;
         }
+        // Rehidratar: si el nodo trae la imagen persistida pero aún no está en
+        // el mapa en memoria (p. ej. tras recargar o cambiar de pestaña),
+        // la restauramos para que la vista previa la muestre.
+        if (n.data && n.data.benefitImage && !_pmBenefitImages[n.id]) {
+          _pmBenefitImages[n.id] = n.data.benefitImage;
+        }
         bar.style.display = "flex";
         const hasSrc = _pmBenefitImages[n.id];
         document.getElementById("pm-img-label").textContent = hasSrc
@@ -7525,29 +7912,51 @@
       }
 
       function pmUploadBenefitImage(input) {
-        if (!pmNode || !input.files || !input.files[0]) return;
+        // El nodo objetivo es el del modal (pmNode) si está abierto, o el nodo
+        // seleccionado en el panel lateral. Antes solo usaba pmNode, por eso al
+        // cargar desde el panel no guardaba nada.
+        const targetNode = pmNode || selectedNode;
+        if (!targetNode || !input.files || !input.files[0]) return;
         const reader = new FileReader();
         reader.onload = function (e) {
-          _pmBenefitImages[pmNode.id] = e.target.result;
-          _pmUpdateImgBar(pmNode);
-          // Re-render the preview with the new image
-          document.getElementById("pm-content").innerHTML =
-            pmRenderWithVars(pmNode);
+          _pmBenefitImages[targetNode.id] = e.target.result;
+          // Persistir también en el dato del nodo para que sobreviva a
+          // cambios de pestaña / guardados / reaperturas.
+          targetNode.data = targetNode.data || {};
+          targetNode.data.benefitImage = e.target.result;
+          _pmUpdateImgBar(targetNode);
+          // Re-render del preview si el modal está abierto
+          const pc = document.getElementById("pm-content");
+          if (pmNode && pc) pc.innerHTML = pmRenderWithVars(pmNode);
+          if (typeof setUnsavedExport === "function") setUnsavedExport();
+          if (typeof showNotif === "function")
+            showNotif("✅ Imagen del beneficio cargada");
         };
         reader.readAsDataURL(input.files[0]);
       }
 
       function pmClearBenefitImage() {
-        if (!pmNode) return;
-        delete _pmBenefitImages[pmNode.id];
-        _pmUpdateImgBar(pmNode);
-        document.getElementById("pm-content").innerHTML =
-          pmRenderWithVars(pmNode);
+        const targetNode = pmNode || selectedNode;
+        if (!targetNode) return;
+        delete _pmBenefitImages[targetNode.id];
+        if (targetNode.data) delete targetNode.data.benefitImage;
+        _pmUpdateImgBar(targetNode);
+        const pc = document.getElementById("pm-content");
+        if (pmNode && pc) pc.innerHTML = pmRenderWithVars(pmNode);
+        if (typeof setUnsavedExport === "function") setUnsavedExport();
       }
 
       /* Open benefit image in a lightbox */
       function pmShowBenefitLightbox(nodeId) {
-        const src = _pmBenefitImages[nodeId];
+        let src = _pmBenefitImages[nodeId];
+        if (!src) {
+          // Buscar en el dato del nodo por si no está en memoria
+          const nd = nodes.find((x) => String(x.id) === String(nodeId));
+          if (nd && nd.data && nd.data.benefitImage) {
+            src = nd.data.benefitImage;
+            _pmBenefitImages[nodeId] = src;
+          }
+        }
         if (!src) return;
         let lb = document.getElementById("benefit-lightbox");
         if (!lb) {
@@ -9212,20 +9621,27 @@
         const title = n.data.title || "Correo electronico";
         const subject = n.data.subject || title;
         const from = n.data.from || "noreply@viveterpel.com";
+        // El cuerpo del email es el campo MENSAJE (con formato/saltos); si está
+        // vacío, respaldo a la descripción para no dejar el correo sin contenido.
+        const msgRichEmail = _waRichField(n, "message");
+        const descRichEmail = _waRichField(n, "subtitle");
         const body =
-          n.data.subtitle ||
+          msgRichEmail ||
+          descRichEmail ||
           "Sabemos que eres un cliente especial y queremos que sigas disfrutando de todos los beneficios.";
         const time = n.data.time || "";
         const tmpl = n.data.template || "";
+        // Versión en texto plano para análisis de palabras clave y recortes.
+        const bodyPlain = stripTags(body);
         const isUrgente =
-          body.toLowerCase().includes("expir") ||
+          bodyPlain.toLowerCase().includes("expir") ||
           subject.toLowerCase().includes("expir") ||
-          body.toLowerCase().includes("hoy") ||
+          bodyPlain.toLowerCase().includes("hoy") ||
           subject.toLowerCase().includes("hoy");
         const isOferta =
-          body.toLowerCase().includes("ofert") ||
+          bodyPlain.toLowerCase().includes("ofert") ||
           subject.toLowerCase().includes("ofert") ||
-          body.toLowerCase().includes("exclusiv") ||
+          bodyPlain.toLowerCase().includes("exclusiv") ||
           subject.toLowerCase().includes("exclusiv");
         const heroBg = isUrgente
           ? "linear-gradient(135deg,#c23934,#7f1d1d)"
@@ -9244,7 +9660,7 @@
             : "";
         const heroImgHtml = imgSrc
           ? `<img src="${imgSrc}" style="width:100%;border-radius:8px;margin-bottom:12px;display:block;max-height:140px;object-fit:cover" alt="Imagen email">`
-          : `<div style="background:${heroBg};border-radius:8px;padding:20px;color:#fff;text-align:center;margin-bottom:12px"><div style="font-size:28px;margin-bottom:6px">${heroEmoji}</div><div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px">${subject}</div><div style="font-size:11px;opacity:0.85;margin-top:5px">${body.substring(0, 80)}${body.length > 80 ? "…" : ""}</div></div>`;
+          : `<div style="background:${heroBg};border-radius:8px;padding:20px;color:#fff;text-align:center;margin-bottom:12px"><div style="font-size:28px;margin-bottom:6px">${heroEmoji}</div><div style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px">${subject}</div><div style="font-size:11px;opacity:0.85;margin-top:5px">${bodyPlain.substring(0, 80)}${bodyPlain.length > 80 ? "…" : ""}</div></div>`;
         return `
   <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;background:#f4f4f4;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.1)">
     <!-- Email client chrome -->
@@ -9288,85 +9704,122 @@
         <span style="color:rgba(255,255,255,0.5);font-size:8px">Para cancelar suscripción haz clic aquí</span>
       </div>
     </div>
-  </div>`;
+  </div>
+  ${stripTags(n.data.objective) ? `<div style="padding:8px 12px;background:#eff6ff;border-top:1px solid #bfdbfe;font-size:10px;color:#1e40af;margin-top:6px;border-radius:8px"><strong>Objetivo:</strong> ${stripTags(n.data.objective)}</div>` : ""}`;
       }
 
       /* ── WHATSAPP ── */
+      // Devuelve el contenido de un campo conservando el formato enriquecido
+      // (negritas, color, emojis, saltos de línea) cuando existe la versión
+      // "_rich_", limpiando SVGs/íconos rotos pegados por error.
+      function _waRichField(n, key) {
+        const rich = n.data["_rich_" + key];
+        if (rich && String(rich).trim()) {
+          let s = String(rich);
+          if (/&lt;svg/i.test(s)) {
+            s = s
+              .replace(/&lt;/g, "<")
+              .replace(/&gt;/g, ">")
+              .replace(/&quot;/g, '"')
+              .replace(/&amp;/g, "&");
+          }
+          s = s
+            .replace(/<svg[\s\S]*?<\/svg>/gi, "")
+            .replace(/<script[\s\S]*?<\/script>/gi, "");
+          return s;
+        }
+        const plain = stripTags(n.data[key]);
+        return plain ? plain.replace(/\n/g, "<br>") : "";
+      }
+
       function buildWAPreview(n) {
         const title = stripTags(n.data.title) || "WhatsApp";
-        const msg =
-          stripTags(n.data.message) ||
+        // El cuerpo de la vista previa es el campo MENSAJE. Si está vacío, se
+        // usa la descripción como respaldo para no dejar la burbuja vacía.
+        const msgRich = _waRichField(n, "message");
+        const descRich = _waRichField(n, "subtitle");
+        const bodyRich =
+          msgRich ||
+          descRich ||
           "¡Te extrañamos! Regístrate y recibe beneficios exclusivos.";
         const time = n.data.time || "11:45 a.m.";
         const tmpl = stripTags(n.data.template) || "";
-        const subtitle = stripTags(n.data.subtitle) || "";
-        const isCTA1 = msg.toLowerCase().includes("punt")
+        const bodyPlainLower = stripTags(
+          n.data.message || n.data.subtitle || "",
+        ).toLowerCase();
+        const ctaPrimary = bodyPlainLower.includes("punt")
           ? "¡Quiero mis puntos!"
-          : msg.toLowerCase().includes("%")
+          : bodyPlainLower.includes("%")
             ? "¡Quiero mi descuento!"
             : "¡Saber más!";
         const timeStr = time.includes(":")
           ? time.replace(/^D\d+\s+/, "")
           : time;
+        // Imagen del beneficio: desde memoria o desde el dato persistido.
         const imgSrc =
-          _pmBenefitImages && _pmBenefitImages[n.id]
-            ? _pmBenefitImages[n.id]
-            : "";
-        const imgHtml = imgSrc
-          ? `<img src="${imgSrc}" style="width:100%;border-radius:6px;margin-bottom:6px;display:block;max-height:120px;object-fit:cover" alt="Imagen">`
-          : "";
-        // CTA buttons: if image loaded, clicking opens it in lightbox
-        const ctaClick = imgSrc
+          (_pmBenefitImages && _pmBenefitImages[n.id]) ||
+          (n.data && n.data.benefitImage) ||
+          "";
+        // La imagen del beneficio NO se muestra en la burbuja; aparece solo
+        // cuando el usuario pulsa el botón "Más información".
+        const moreClick = imgSrc
           ? `onclick="pmShowBenefitLightbox('${n.id}')" style="cursor:pointer"`
-          : `style="cursor:default"`;
+          : "";
+        const moreHint = imgSrc
+          ? ' <span style="font-size:9px;opacity:0.55"></span>'
+          : "";
         return `
-  <div style="max-width:340px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.12)">
-    <!-- WA App chrome -->
-    <div style="background:#1d2a3a;padding:6px 10px;display:flex;align-items:center;gap:5px">
-      <div style="display:flex;gap:4px"><div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div><div style="width:8px;height:8px;border-radius:50%;background:#febc2e"></div><div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div></div>
-      <div style="flex:1;text-align:center;font-size:9px;color:rgba(255,255,255,0.5)">WhatsApp Business</div>
-    </div>
-    <div class="wa-chrome">
-      <div class="wa-bar">
-        <div class="wa-avatar" style="background:#E8001D;font-weight:700;font-size:13px;color:#fff">T</div>
-        <div>
-          <div class="wa-name">Vívelo Terpel ✔✔</div>
-          <div class="wa-status">en línea</div>
+  <div class="wam-wrap">
+    <div class="wam-shell">
+      <div class="wam-screen">
+        <!-- WhatsApp top bar -->
+        <div class="wam-topbar">
+          <span class="wam-back">‹</span>
+          <div class="wam-avatar">T</div>
+          <div>
+            <div class="wam-cname">Vívelo Terpel ✔</div>
+            <div class="wam-cstatus">en línea</div>
+          </div>
+          <div class="wam-topicons">📹 📞 ⋮</div>
         </div>
-        <div style="margin-left:auto;display:flex;gap:12px;opacity:0.8;font-size:14px">📎 ☎</div>
-      </div>
-      <!-- Chat wallpaper area -->
-      <div style="background:#e5ddd5 url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\"><circle cx=\"10\" cy=\"10\" r=\"1\" fill=\"rgba(0,0,0,0.05)\"/></svg>') repeat;padding:10px 10px 6px;display:flex;flex-direction:column;gap:6px">
-        <div class="wa-bubble">
-          ${imgHtml}
-          <p style="font-weight:700;font-size:12px">${title} 📲</p>
-          <p>${msg}</p>
-          ${subtitle && subtitle !== title ? `<p style="color:#555;font-size:10px;margin-top:4px"><em>${subtitle}</em></p>` : ""}
-          ${tmpl ? `<p style="font-size:9px;color:#aaa;margin-top:2px">Plantilla: ${tmpl}</p>` : ""}
-          <div class="wa-time">${timeStr || "Ahora"} ✔✔</div>
+        <!-- Chat body -->
+        <div class="wam-body">
+          <div class="wam-daystamp">HOY</div>
+          <div class="wam-bubble">
+            <div class="wam-btitle">${title}</div>
+            <div class="wam-btext">${bodyRich}</div>
+            ${tmpl ? `<div style="font-size:9px;color:#8696a0;margin-top:4px">Plantilla: ${tmpl}</div>` : ""}
+            <div class="wam-btime">${timeStr || "Ahora"} <span>✔✔</span></div>
+          </div>
+          <!-- Interactive buttons (WhatsApp Business) -->
+          <div class="wam-ctas">
+            <div class="wam-cta" style="font-weight:700;cursor:default">🔗 ${ctaPrimary}</div>
+            <div class="wam-cta" ${moreClick}>ℹ️ Más información${moreHint}</div>
+          </div>
         </div>
-      </div>
-      <div class="wa-btns">
-        <div class="wa-btn" ${ctaClick} style="color:#128c7e;font-weight:700;${imgSrc ? "cursor:pointer;" : ""}">🔗 ${isCTA1}${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ""}</div>
-        <div class="wa-btn" ${ctaClick} style="color:#128c7e;${imgSrc ? "cursor:pointer;" : ""}">ℹ️ Más información${imgSrc ? ' <span style="font-size:9px;opacity:0.6">(ver imagen)</span>' : ""}</div>
-      </div>
-      <!-- Input bar -->
-      <div style="background:#f0f0f0;padding:7px 10px;display:flex;align-items:center;gap:6px;border-top:1px solid #ddd">
-        <div style="font-size:18px;color:#999">😊</div>
-        <div style="flex:1;background:#fff;border-radius:20px;padding:6px 12px;font-size:11px;color:#999">Escribe un mensaje</div>
-        <div style="font-size:18px;color:#999">📎</div>
-        <div style="width:32px;height:32px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:15px">🎙</div>
+        <!-- Input bar -->
+        <div class="wam-input">
+          <span style="font-size:17px;color:#8696a0">😊</span>
+          <div class="wam-input-field">Escribe un mensaje</div>
+          <span style="font-size:16px;color:#8696a0">📎</span>
+          <div class="wam-send">🎙</div>
+        </div>
       </div>
     </div>
   </div>
-  <div style="padding:8px 12px;background:#f0fdf4;border-top:1px solid #bbf7d0;font-size:10px;color:#166534">
-    <strong>Objetivo:</strong> ${subtitle || "Mensaje de WhatsApp Business al contacto"}
+  <div style="padding:8px 12px;background:#f0fdf4;border-top:1px solid #bbf7d0;font-size:10px;color:#166534;margin-top:6px;border-radius:8px;${stripTags(n.data.objective) ? "" : "display:none"}">
+    <strong>Objetivo:</strong> ${stripTags(n.data.objective)}
   </div>`;
       }
 
       /* ── SMS ── */
       function buildSMSPreview(n) {
-        const msg = stripTags(n.data.message) || "Mensaje SMS.";
+        // El cuerpo del SMS es el campo MENSAJE; si está vacío, respaldo a la
+        // descripción para no mostrar la burbuja vacía.
+        const msg =
+          stripTags(n.data.message) ||
+          stripTags(n.data.subtitle) ||
+          "Mensaje SMS.";
         const sender = stripTags(n.data.senderId) || "VIVETERPEL";
         const subtitle = stripTags(n.data.subtitle) || "";
         const time = n.data.time || "";
@@ -9408,21 +9861,22 @@
       </div>
     </div>
   </div>
-  <div style="padding:10px 12px;background:#fff8e6;border-top:1px solid #fcd34d;margin-top:4px;border-radius:0 0 8px 8px">
+  <div style="padding:10px 12px;background:#fff8e6;border-top:1px solid #fcd34d;margin-top:4px;border-radius:0 0 8px 8px;${stripTags(n.data.objective) ? "" : "display:none"}">
     <div style="font-size:10px;color:#92400e;font-weight:700;text-transform:uppercase;margin-bottom:3px">Objetivo del SMS</div>
-    <div style="font-size:11px;color:#444">${subtitle || "Recordatorio con oferta de conversión"}</div>
+    <div style="font-size:11px;color:#444">${stripTags(n.data.objective)}</div>
   </div>`;
       }
 
       /* ── Notificación push (enhanced phone mockup) ── */
       function buildPushPreview(n) {
-        const title = stripTags(n.data.title) || "Hola Carlos, tienes un aviso";
+        const title = stripTags(n.data.title) || "Vive Telpel App/Web";
+        // El cuerpo del push es el campo MENSAJE; respaldo a descripción.
         const msg =
           stripTags(n.data.message) ||
-          'Tu beneficio "Bono Combustible $20.000" venció. Contáctanos para renovarlo.';
+          stripTags(n.data.subtitle) ||
+          "Tienes un nuevo beneficio disponible en tu app Vívelo Terpel.";
         const time = n.data.time || "";
-        const subtitle = stripTags(n.data.subtitle) || "";
-        const intentType = stripTags(n.data.intentType) || "";
+        const objective = stripTags(n.data.objective) || "";
         const timeHHMM = time.replace(/^D\d+\s+/, "") || "12:12";
         const now = new Date();
         const dateStr = now.toLocaleDateString("es-CO", {
@@ -9432,63 +9886,90 @@
         });
         const dateFormatted =
           dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-        // benefit pill label from intentType
-        const pillLabel =
-          intentType === "Bono"
-            ? "🪙 Bono Combustible $20.000"
-            : intentType === "Compra"
-              ? "🛒 Beneficio de Compra"
-              : intentType === "Evento"
-                ? "📅 Evento Especial"
-                : subtitle
-                  ? `✨ ${subtitle.substring(0, 28)}`
-                  : "🪙 Ver beneficio";
         const imgSrc =
-          _pmBenefitImages && _pmBenefitImages[n.id]
-            ? _pmBenefitImages[n.id]
-            : "";
-        const imgHtml = imgSrc
-          ? `<img src="${imgSrc}" class="push-notif-img-preview" alt="Imagen beneficio">`
+          (_pmBenefitImages && _pmBenefitImages[n.id]) ||
+          (n.data && n.data.benefitImage) ||
+          "";
+        // "Ver beneficio" navega DENTRO del mismo teléfono a la vista de la app.
+        const verClick = imgSrc
+          ? `onclick="pmOpenAppView('${n.id}')" style="cursor:pointer"`
+          : "";
+        // Capa de la app (oculta por defecto), dentro de la misma pantalla.
+        const appLayer = imgSrc
+          ? `
+        <div class="push-app-layer" id="push-app-layer-${n.id}" style="display:none">
+          <div class="push-app-topbar">
+            <span class="push-app-back" onclick="pmCloseAppView('${n.id}')" title="Volver">‹</span>
+            <div class="push-app-logo-dot">T</div>
+            <span class="push-app-logo">terpel</span>
+            <span class="push-app-chip">⚡ Tu beneficio</span>
+          </div>
+          <div class="push-app-body">
+            <div class="push-app-section">🎁 Detalle del beneficio</div>
+            <img src="${imgSrc}" class="push-app-img" alt="Beneficio">
+          </div>
+          <div class="push-app-nav">
+            ${["🏠 Inicio", "🎟 Cupones", "🏆 Retos", "👤 Perfil"]
+              .map(
+                (t, i) =>
+                  `<div style="flex:1;text-align:center;font-size:8px;color:${i === 0 ? "#E8001D" : "#999"};font-weight:${i === 0 ? "700" : "400"}">${t}</div>`,
+              )
+              .join("")}
+          </div>
+        </div>`
           : "";
         return `
   <div class="push-mockup-wrap">
     <div class="push-phone-shell">
       <div class="push-phone-screen">
-        <div class="push-statusbar">
-          <span>${timeHHMM}</span>
-          <div class="push-statusbar-icons">
-            <span>▲▲▲</span>
-            <span style="background:#4CAF50;color:#fff;font-size:8px;padding:1px 4px;border-radius:3px">88%</span>
+        <!-- Capa: pantalla de bloqueo con la notificación -->
+        <div class="push-lock-layer" id="push-lock-layer-${n.id}">
+          <div class="push-statusbar">
+            <span>${timeHHMM}</span>
+            <div class="push-statusbar-icons">
+              <span>▲▲▲</span>
+              <span style="background:#4CAF50;color:#fff;font-size:8px;padding:1px 4px;border-radius:3px">88%</span>
+            </div>
           </div>
+          <div class="push-clock">${timeHHMM}</div>
+          <div class="push-lockdate">${dateFormatted}</div>
+          <div class="push-notif-card">
+            <div class="push-notif-header">
+              <div class="push-notif-app-icon">T</div>
+              <div class="push-notif-app-name">Vívelo Terpel</div>
+            </div>
+            <div class="push-notif-body">
+              <div class="push-notif-title-text">🔔 ${title}</div>
+              <div class="push-notif-msg-text">${msg}</div>
+            </div>
+            <div class="push-notif-actions">
+              <button class="push-action-btn primary" ${verClick}>Ver beneficio</button>
+              <button class="push-action-btn secondary">Cerrar</button>
+            </div>
+          </div>
+          <div class="push-slide-hint">↑ Deslizar para abrir la app</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);text-align:center;padding-bottom:8px">Abrir Vívelo Terpel →</div>
         </div>
-        <div class="push-clock">${timeHHMM}</div>
-        <div class="push-lockdate">${dateFormatted}</div>
-        <div class="push-notif-card">
-          <div class="push-notif-header">
-            <div class="push-notif-app-icon">T</div>
-            <div class="push-notif-app-name">Vívelo Terpel</div>
-            <div class="push-vencido-badge">VENCIDO</div>
-          </div>
-          <div class="push-notif-body">
-            <div class="push-notif-title-text">🔔 ${title}</div>
-            <div class="push-notif-msg-text">${msg}</div>
-            <div class="push-benefit-pill">${pillLabel}</div>
-          </div>
-          ${imgHtml}
-          <div class="push-notif-actions">
-            <button class="push-action-btn primary">Ver beneficio</button>
-            <button class="push-action-btn secondary">Cerrar</button>
-          </div>
-        </div>
-        <div class="push-slide-hint">↑ Deslizar para abrir la app</div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.4);text-align:center;padding-bottom:8px">Abrir Vívelo Terpel →</div>
+        ${appLayer}
       </div>
     </div>
-    <div style="margin-top:8px;font-size:10px;color:#888;text-align:center">App Vívelo Terpel — ${subtitle || "Carlos García"}</div>
   </div>
-  <div style="padding:8px 12px;background:#fdf2f8;border-top:1px solid #f5d0fe;font-size:10px;color:#701a75">
-    <strong>Objetivo:</strong> ${subtitle || "Notificación push inmediata al usuario"}
-  </div>`;
+  ${objective ? `<div style="padding:8px 12px;background:#fdf2f8;border-top:1px solid #f5d0fe;font-size:10px;color:#701a75;margin-top:6px;border-radius:8px"><strong>Objetivo:</strong> ${objective}</div>` : ""}`;
+      }
+
+      /* Navegar dentro del mismo teléfono: mostrar la vista de la app. */
+      function pmOpenAppView(nodeId) {
+        const lock = document.getElementById("push-lock-layer-" + nodeId);
+        const app = document.getElementById("push-app-layer-" + nodeId);
+        if (lock) lock.style.display = "none";
+        if (app) app.style.display = "flex";
+      }
+      /* Volver a la pantalla de bloqueo. */
+      function pmCloseAppView(nodeId) {
+        const lock = document.getElementById("push-lock-layer-" + nodeId);
+        const app = document.getElementById("push-app-layer-" + nodeId);
+        if (app) app.style.display = "none";
+        if (lock) lock.style.display = "flex";
       }
 
       /* ── BANNER in-app ── */
@@ -10859,4 +11340,3 @@
     </script>
   </body>
 </html>
-clear

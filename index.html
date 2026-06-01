@@ -4617,6 +4617,26 @@
       </div>
     </div>
 
+    <!-- EXPORT: SAVE-FIRST MODAL -->
+    <div class="modal-overlay" id="modal-export-save">
+      <div class="modal-box">
+        <div class="modal-ico">💾</div>
+        <div class="modal-ttl">Tienes cambios sin guardar</div>
+        <div class="modal-msg">
+          Para exportar conviene guardar tus cambios primero. Se guardarán en el
+          historial y luego continuará la exportación.
+        </div>
+        <div class="modal-actions">
+          <button class="mbtn mbtn-cancel" onclick="dismissExportSaveModal()">
+            Seguir editando
+          </button>
+          <button class="mbtn mbtn-apply" onclick="saveThenExport()">
+            Guarda los cambios ahora
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- ══════════════════════════════════════════
      ACTIVATION EXPERIENCE OVERLAY
 ══════════════════════════════════════════ -->
@@ -8727,6 +8747,9 @@
       }
 
       function saveFlow() {
+        _requestExport("json", _doExportJSON);
+      }
+      function _doExportJSON() {
         const data = _buildAllJourneysData();
         localStorage.setItem("jb_flow", JSON.stringify(data));
         const a = document.createElement("a");
@@ -9241,17 +9264,54 @@
         }
       }
 
+      let _hasUnsaved = false;
       function setUnsavedExport() {
+        _hasUnsaved = true;
         document.getElementById("unsaved-dot").style.display = "block";
       }
       function clearUnsavedExport() {
+        _hasUnsaved = false;
         document.getElementById("unsaved-dot").style.display = "none";
+      }
+      function _hasUnsavedChanges() {
+        const dot = document.getElementById("unsaved-dot");
+        return _hasUnsaved || (dot && dot.style.display !== "none");
+      }
+
+      /* ── Guardar antes de exportar ── */
+      // Acción pendiente tras decidir guardar: "png" | "json"
+      let _pendingExport = null;
+      function _requestExport(kind, doExport) {
+        if (_hasUnsavedChanges()) {
+          _pendingExport = { kind, doExport };
+          document.getElementById("modal-export-save").classList.add("show");
+        } else {
+          doExport();
+        }
+      }
+      function dismissExportSaveModal() {
+        document.getElementById("modal-export-save").classList.remove("show");
+        _pendingExport = null;
+      }
+      function saveThenExport() {
+        document.getElementById("modal-export-save").classList.remove("show");
+        // Guardar en el historial (esto limpia el estado de "sin guardar").
+        if (typeof saveToTool === "function") saveToTool();
+        const pend = _pendingExport;
+        _pendingExport = null;
+        // Continuar con la exportación solicitada.
+        if (pend && typeof pend.doExport === "function") {
+          setTimeout(pend.doExport, 60);
+        }
       }
 
       /* ════════════════════════════════
    EXPORT PNG — SVG rendering
 ════════════════════════════════ */
       async function exportPNG() {
+        _requestExport("png", _doExportPNG);
+      }
+      async function _doExportPNG() {
         // html2canvas-pro expone la global como "html2canvas"; este guard
         // evita el crash si el CDN no cargó (p. ej. sin conexión).
         if (typeof html2canvas !== "function") {
@@ -9310,6 +9370,22 @@
             maxX = Math.max(maxX, lx + lbl.offsetWidth);
             maxY = Math.max(maxY, ly + lbl.offsetHeight);
           }
+        });
+
+        // Text boxes (annotations like "Interactividad de Usuarios") can sit
+        // above/around the nodes — include them so they aren't cut off.
+        (typeof textBoxes !== "undefined" ? textBoxes : []).forEach((tb) => {
+          let w = tb.w || 160,
+            h = tb.h || 60;
+          const elTb = document.getElementById("tb-" + tb.id);
+          if (elTb) {
+            w = elTb.offsetWidth;
+            h = elTb.offsetHeight;
+          }
+          minX = Math.min(minX, tb.x);
+          minY = Math.min(minY, tb.y);
+          maxX = Math.max(maxX, tb.x + w);
+          maxY = Math.max(maxY, tb.y + h);
         });
         if (!isFinite(minX)) {
           showNotif("⚠ No hay nodos en el flujo");

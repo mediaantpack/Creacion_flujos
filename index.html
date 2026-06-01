@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Journey Builder — Marketing Cloud</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23E8001D'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='38' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js"></script>
     <style>
@@ -1928,8 +1933,14 @@
         animation: pushAppIn 0.22s ease;
       }
       @keyframes pushAppIn {
-        from { transform: translateX(18%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
+        from {
+          transform: translateX(18%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
       }
       .push-app-topbar {
         background: #e8001d;
@@ -1949,15 +1960,31 @@
         font-weight: 700;
       }
       .push-app-logo-dot {
-        width: 24px; height: 24px; border-radius: 50%;
-        background: #fff; color: #e8001d; font-weight: 800;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 12px; flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #fff;
+        color: #e8001d;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        flex-shrink: 0;
       }
-      .push-app-logo { color: #fff; font-weight: 800; font-size: 14px; }
+      .push-app-logo {
+        color: #fff;
+        font-weight: 800;
+        font-size: 14px;
+      }
       .push-app-chip {
-        margin-left: auto; background: #ffd000; color: #1a1a1a;
-        font-size: 9px; font-weight: 800; padding: 3px 9px; border-radius: 12px;
+        margin-left: auto;
+        background: #ffd000;
+        color: #1a1a1a;
+        font-size: 9px;
+        font-weight: 800;
+        padding: 3px 9px;
+        border-radius: 12px;
         white-space: nowrap;
       }
       .push-app-body {
@@ -1967,16 +1994,24 @@
         background: #f4f5f7;
       }
       .push-app-section {
-        font-size: 10px; font-weight: 700; color: #888;
-        text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        margin-bottom: 8px;
       }
       .push-app-img {
-        width: 100%; border-radius: 12px; display: block;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        width: 100%;
+        border-radius: 12px;
+        display: block;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
       }
       .push-app-nav {
-        display: flex; background: #fff;
-        border-top: 1px solid #e5e7eb; padding: 9px 0 12px;
+        display: flex;
+        background: #fff;
+        border-top: 1px solid #e5e7eb;
+        padding: 9px 0 12px;
         flex-shrink: 0;
       }
       .push-statusbar-icons {
@@ -2338,6 +2373,172 @@
         font-size: 15px;
         flex-shrink: 0;
       }
+      /* — WhatsApp in-app browser layer — */
+      .wam-chat-layer {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+      }
+      .wab-browser-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 30px;
+        overflow: hidden;
+        animation: wabBrowserIn 0.22s ease;
+      }
+      @keyframes wabBrowserIn {
+        from {
+          opacity: 0;
+          transform: translateY(8%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .wab-browser-bar {
+        background: #f1f3f4;
+        padding: 28px 10px 8px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .wab-browser-back {
+        font-size: 18px;
+        color: #1d4ed8;
+        cursor: pointer;
+        line-height: 1;
+        font-weight: 700;
+      }
+      .wab-browser-url {
+        flex: 1;
+        background: #fff;
+        border-radius: 14px;
+        padding: 5px 10px;
+        font-size: 9px;
+        color: #555;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .wab-browser-body {
+        flex: 1;
+        overflow-y: auto;
+        background: #fff;
+      }
+      .wab-app-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 14px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .wab-app-logo-dot {
+        color: #e8001d;
+        font-size: 16px;
+        background: linear-gradient(135deg, #ffb300, #e8001d);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .wab-app-logo {
+        font-size: 16px;
+        color: #e8001d;
+        font-weight: 400;
+      }
+      .wab-app-logo strong {
+        font-weight: 800;
+      }
+      .wab-app-nav {
+        display: flex;
+        margin: 10px 12px;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        padding: 8px 4px;
+      }
+      .wab-nav-item {
+        flex: 1;
+        text-align: center;
+        font-size: 9px;
+        color: #555;
+      }
+      .wab-nav-item div {
+        font-size: 15px;
+        margin-bottom: 2px;
+        color: #555;
+      }
+      .wab-nav-item.active {
+        color: #e8001d;
+        font-weight: 700;
+      }
+      .wab-nav-item.active div {
+        color: #e8001d;
+      }
+      .wab-banner {
+        margin: 4px 12px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      }
+      .wab-content {
+        padding: 14px;
+      }
+      .wab-chip {
+        display: inline-block;
+        background: #fde8e8;
+        color: #e8001d;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 14px;
+        margin-bottom: 8px;
+      }
+      .wab-h1 {
+        font-size: 17px;
+        font-weight: 800;
+        color: #e8001d;
+        margin-bottom: 6px;
+      }
+      .wab-p {
+        font-size: 11px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 14px;
+      }
+      .wab-btn-outline {
+        width: 100%;
+        background: #fff;
+        color: #e8001d;
+        border: 1.5px solid #e8001d;
+        border-radius: 10px;
+        padding: 11px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .wab-btn-fill {
+        width: 100%;
+        background: #e8001d;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
       /* — legacy sidebar push stubs (keep for canvas mini-preview) — */
       .push-phone {
         background: linear-gradient(135deg, #667eea, #764ba2);
@@ -2429,6 +2630,223 @@
         font-size: 11px;
         color: #111;
         line-height: 1.5;
+      }
+
+      /* — SMS phone mockup (iMessage style inside a phone) — */
+      .smsm-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 0 0;
+      }
+      .smsm-shell {
+        width: 260px;
+        background: #1a1a22;
+        border-radius: 38px;
+        padding: 10px;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          0 20px 50px rgba(0, 0, 0, 0.55);
+        position: relative;
+      }
+      .smsm-shell::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 22px;
+        background: #1a1a22;
+        border-radius: 14px;
+        z-index: 6;
+      }
+      .smsm-screen {
+        background: #fff;
+        border-radius: 30px;
+        overflow: hidden;
+        height: 480px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      /* Layer: Messages app */
+      .smsm-msg-layer {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        z-index: 2;
+      }
+      .smsm-topbar {
+        background: #f8f8f8;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 30px 12px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        flex-shrink: 0;
+      }
+      .smsm-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e8001d;
+        color: #fff;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .smsm-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: #111;
+      }
+      .smsm-verified {
+        font-size: 9px;
+        color: #888;
+      }
+      .smsm-body {
+        flex: 1;
+        background: #fff;
+        padding: 12px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        overflow-y: auto;
+      }
+      .smsm-daystamp {
+        align-self: center;
+        font-size: 9px;
+        color: #999;
+        margin-bottom: 4px;
+      }
+      .smsm-bubble {
+        align-self: flex-start;
+        background: #e9e9eb;
+        color: #111;
+        border-radius: 16px 16px 16px 4px;
+        padding: 9px 12px;
+        max-width: 84%;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .smsm-img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 6px;
+        display: block;
+        cursor: pointer;
+      }
+      .smsm-link-card {
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 10px;
+        padding: 8px 10px;
+        margin-top: 7px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        cursor: pointer;
+      }
+      .smsm-time {
+        font-size: 9px;
+        color: #999;
+        text-align: right;
+        margin-top: 4px;
+      }
+      .smsm-input {
+        background: #f0f0f0;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        border-top: 1px solid #ddd;
+        flex-shrink: 0;
+      }
+      .smsm-input-field {
+        flex: 1;
+        background: #fff;
+        border-radius: 18px;
+        padding: 7px 12px;
+        font-size: 11px;
+        color: #999;
+        border: 1px solid #e0e0e0;
+      }
+      .smsm-send {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #007aff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 13px;
+      }
+      /* Layer: in-app browser */
+      .smsm-browser-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        animation: smsmBrowserIn 0.22s ease;
+      }
+      @keyframes smsmBrowserIn {
+        from {
+          opacity: 0;
+          transform: translateY(10%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .smsm-browser-bar {
+        background: #f1f3f4;
+        padding: 28px 10px 8px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-shrink: 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .smsm-browser-back {
+        font-size: 18px;
+        color: #1d4ed8;
+        cursor: pointer;
+        line-height: 1;
+        font-weight: 700;
+      }
+      .smsm-browser-url {
+        flex: 1;
+        background: #fff;
+        border-radius: 14px;
+        padding: 5px 10px;
+        font-size: 9px;
+        color: #555;
+        border: 1px solid #ddd;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .smsm-browser-body {
+        flex: 1;
+        overflow-y: auto;
+        background: #fff;
+      }
+      .smsm-browser-img {
+        width: 100%;
+        display: block;
       }
 
       /* — Banner preview — */
@@ -7117,6 +7535,8 @@
     <button type="button" class="rtb-btn rtb-emoji" data-cmd="insertText" data-val="👉" data-field="${k}">👉</button>
     <button type="button" class="rtb-btn rtb-emoji" data-cmd="insertText" data-val="🏆" data-field="${k}">🏆</button>
     <button type="button" class="rtb-btn rtb-emoji" data-cmd="insertText" data-val="💎" data-field="${k}">💎</button>
+    <button type="button" class="rtb-btn rtb-emoji" data-cmd="insertText" data-val="🤖" data-field="${k}">🤖</button>
+    <button type="button" class="rtb-btn rtb-emoji" data-cmd="insertText" data-val="😎" data-field="${k}">😎</button>
   </div>
   <div class="rtb-editor field-input" id="fp-${k}-editor" contenteditable="true" data-placeholder="Escribe aquí..." data-field="${k}">${htmlVal}</div>
   <textarea class="rtb-textarea" id="fp-${k}">${val}</textarea>
@@ -7887,7 +8307,7 @@
       function _pmUpdateImgBar(n) {
         const bar = document.getElementById("pm-img-upload-bar");
         if (!bar) return;
-        const types = ["push", "email", "whatsapp"];
+        const types = ["push", "email", "whatsapp", "sms"];
         if (!n || !types.includes(n.type)) {
           bar.style.display = "none";
           return;
@@ -7906,7 +8326,9 @@
             ? 'Sube una imagen para el botón "Ver beneficio"'
             : n.type === "email"
               ? "Sube una imagen de encabezado para el email"
-              : "Sube una imagen para los botones del mensaje";
+              : n.type === "sms"
+                ? "Sube una imagen para mostrar al abrir el enlace"
+                : "Sube una imagen para los botones del mensaje";
         const clearBtn = document.getElementById("pm-img-clear-btn");
         if (clearBtn) clearBtn.style.display = hasSrc ? "inline-flex" : "none";
       }
@@ -7916,7 +8338,10 @@
         // seleccionado en el panel lateral. Antes solo usaba pmNode, por eso al
         // cargar desde el panel no guardaba nada.
         const targetNode = pmNode || selectedNode;
-        if (!targetNode || !input.files || !input.files[0]) return;
+        if (!targetNode || !input.files || !input.files[0]) {
+          if (input) input.value = "";
+          return;
+        }
         const reader = new FileReader();
         reader.onload = function (e) {
           _pmBenefitImages[targetNode.id] = e.target.result;
@@ -7931,6 +8356,8 @@
           if (typeof setUnsavedExport === "function") setUnsavedExport();
           if (typeof showNotif === "function")
             showNotif("✅ Imagen del beneficio cargada");
+          // Reset para permitir volver a cargar la MISMA imagen otra vez.
+          input.value = "";
         };
         reader.readAsDataURL(input.files[0]);
       }
@@ -8327,13 +8754,16 @@
    que la herramienta pueda restaurar el estado al recargar.
 ════════════════════════════════ */
       const JB_HISTORY_KEY = "jb_history";
-      const JB_HISTORY_MAX = 50;
+      const JB_HISTORY_MAX = 18;
 
       function _loadHistory() {
         try {
           const raw = localStorage.getItem(JB_HISTORY_KEY);
-          const arr = raw ? JSON.parse(raw) : [];
-          return Array.isArray(arr) ? arr : [];
+          let arr = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(arr)) return [];
+          // Respetar el límite máximo conservando las versiones más recientes.
+          if (arr.length > JB_HISTORY_MAX) arr = arr.slice(-JB_HISTORY_MAX);
+          return arr;
         } catch (e) {
           return [];
         }
@@ -8554,6 +8984,18 @@
         }
 
         journeys = JSON.parse(JSON.stringify(tabs));
+        // Rehidratar las imágenes del beneficio desde los nodos de TODAS las
+        // pestañas, para que la vista previa las muestre tras importar/restaurar.
+        try {
+          journeys.forEach((j) => {
+            const ns = (j.state && j.state.nodes) || [];
+            ns.forEach((nd) => {
+              if (nd && nd.data && nd.data.benefitImage) {
+                _pmBenefitImages[nd.id] = nd.data.benefitImage;
+              }
+            });
+          });
+        } catch (e) {}
         // Determinar pestaña activa
         activeJourneyId =
           (data.activeJourneyId &&
@@ -9760,56 +10202,114 @@
           (_pmBenefitImages && _pmBenefitImages[n.id]) ||
           (n.data && n.data.benefitImage) ||
           "";
-        // La imagen del beneficio NO se muestra en la burbuja; aparece solo
-        // cuando el usuario pulsa el botón "Más información".
+        // "Más información" abre un navegador DENTRO del mismo teléfono con la
+        // página de Vívelo Terpel; la imagen cargada se coloca en el banner.
         const moreClick = imgSrc
-          ? `onclick="pmShowBenefitLightbox('${n.id}')" style="cursor:pointer"`
+          ? `onclick="waOpenBrowser('${n.id}')" style="cursor:pointer"`
           : "";
         const moreHint = imgSrc
-          ? ' <span style="font-size:9px;opacity:0.55"></span>'
+          ? ' <span style="font-size:9px;opacity:0.55">(ver página)</span>'
+          : "";
+        // Banner de la página: imagen cargada, o un placeholder.
+        const bannerHtml = imgSrc
+          ? `<img src="${imgSrc}" style="width:100%;display:block" alt="Banner Vívelo Terpel">`
+          : `<div style="background:linear-gradient(135deg,#E8001D,#b30016);color:#fff;padding:30px 16px;text-align:center;font-weight:800;font-size:13px">VÍVELO TERPEL<br><span style="font-size:10px;font-weight:400;opacity:0.85">Carga una imagen para el banner</span></div>`;
+        // Capa del navegador in-app (oculta por defecto) solo si hay imagen.
+        const browserLayer = imgSrc
+          ? `
+        <div class="wab-browser-layer" id="wa-browser-layer-${n.id}" style="display:none">
+          <div class="wab-browser-bar">
+            <span class="wab-browser-back" onclick="waCloseBrowser('${n.id}')" title="Volver">‹</span>
+            <div class="wab-browser-url">🔒 viveterpel.com/beneficio</div>
+            <span style="font-size:13px;color:#888">⋮</span>
+          </div>
+          <div class="wab-browser-body">
+            <!-- App header -->
+            <div class="wab-app-header">
+              <span class="wab-app-logo-dot">◐</span>
+              <span class="wab-app-logo">vive<strong>terpel</strong></span>
+            </div>
+            <!-- Nav -->
+            <div class="wab-app-nav">
+              <div class="wab-nav-item active"><div>⌂</div>Inicio</div>
+              <div class="wab-nav-item"><div>◎</div>Mapas</div>
+              <div class="wab-nav-item"><div>🤝</div>Aliados</div>
+              <div class="wab-nav-item"><div>•••</div>Más</div>
+            </div>
+            <!-- Banner (imagen cargada) -->
+            <div class="wab-banner">${bannerHtml}</div>
+            <!-- Content -->
+            <div class="wab-content">
+              <span class="wab-chip">Conócenos</span>
+              <div class="wab-h1">¿Qué es ViveTerpel?</div>
+              <div class="wab-p">Descubre nuestro nuevo programa de beneficios en el que acumulas puntos fácil y rápido y los vives de verdad, disfrutándolos cómo quieres.</div>
+              <button class="wab-btn-outline">Iniciar sesión</button>
+              <button class="wab-btn-fill">Regístrate, ¡Es gratis!</button>
+            </div>
+          </div>
+        </div>`
           : "";
         return `
   <div class="wam-wrap">
     <div class="wam-shell">
       <div class="wam-screen">
-        <!-- WhatsApp top bar -->
-        <div class="wam-topbar">
-          <span class="wam-back">‹</span>
-          <div class="wam-avatar">T</div>
-          <div>
-            <div class="wam-cname">Vívelo Terpel ✔</div>
-            <div class="wam-cstatus">en línea</div>
+        <!-- Capa: chat de WhatsApp -->
+        <div class="wam-chat-layer" id="wa-chat-layer-${n.id}">
+          <!-- WhatsApp top bar -->
+          <div class="wam-topbar">
+            <span class="wam-back">‹</span>
+            <div class="wam-avatar">T</div>
+            <div>
+              <div class="wam-cname">Vívelo Terpel ✔</div>
+              <div class="wam-cstatus">en línea</div>
+            </div>
+            <div class="wam-topicons">📹 📞 ⋮</div>
           </div>
-          <div class="wam-topicons">📹 📞 ⋮</div>
-        </div>
-        <!-- Chat body -->
-        <div class="wam-body">
-          <div class="wam-daystamp">HOY</div>
-          <div class="wam-bubble">
-            <div class="wam-btitle">${title}</div>
-            <div class="wam-btext">${bodyRich}</div>
-            ${tmpl ? `<div style="font-size:9px;color:#8696a0;margin-top:4px">Plantilla: ${tmpl}</div>` : ""}
-            <div class="wam-btime">${timeStr || "Ahora"} <span>✔✔</span></div>
+          <!-- Chat body -->
+          <div class="wam-body">
+            <div class="wam-daystamp">HOY</div>
+            <div class="wam-bubble">
+              <div class="wam-btitle">${title}</div>
+              <div class="wam-btext">${bodyRich}</div>
+              ${tmpl ? `<div style="font-size:9px;color:#8696a0;margin-top:4px">Plantilla: ${tmpl}</div>` : ""}
+              <div class="wam-btime">${timeStr || "Ahora"} <span>✔✔</span></div>
+            </div>
+            <!-- Interactive buttons (WhatsApp Business) -->
+            <div class="wam-ctas">
+              <div class="wam-cta" ${moreClick} style="font-weight:700;${imgSrc ? "cursor:pointer" : "cursor:default"}">🔗 ${ctaPrimary}</div>
+              <div class="wam-cta" ${moreClick}>ℹ️ Más información${moreHint}</div>
+            </div>
           </div>
-          <!-- Interactive buttons (WhatsApp Business) -->
-          <div class="wam-ctas">
-            <div class="wam-cta" style="font-weight:700;cursor:default">🔗 ${ctaPrimary}</div>
-            <div class="wam-cta" ${moreClick}>ℹ️ Más información${moreHint}</div>
+          <!-- Input bar -->
+          <div class="wam-input">
+            <span style="font-size:17px;color:#8696a0">😊</span>
+            <div class="wam-input-field">Escribe un mensaje</div>
+            <span style="font-size:16px;color:#8696a0">📎</span>
+            <div class="wam-send">🎙</div>
           </div>
         </div>
-        <!-- Input bar -->
-        <div class="wam-input">
-          <span style="font-size:17px;color:#8696a0">😊</span>
-          <div class="wam-input-field">Escribe un mensaje</div>
-          <span style="font-size:16px;color:#8696a0">📎</span>
-          <div class="wam-send">🎙</div>
-        </div>
+        ${browserLayer}
       </div>
     </div>
   </div>
   <div style="padding:8px 12px;background:#f0fdf4;border-top:1px solid #bbf7d0;font-size:10px;color:#166534;margin-top:6px;border-radius:8px;${stripTags(n.data.objective) ? "" : "display:none"}">
     <strong>Objetivo:</strong> ${stripTags(n.data.objective)}
   </div>`;
+      }
+
+      /* Navegar dentro del mismo teléfono WhatsApp: abrir el navegador in-app. */
+      function waOpenBrowser(nodeId) {
+        const chat = document.getElementById("wa-chat-layer-" + nodeId);
+        const br = document.getElementById("wa-browser-layer-" + nodeId);
+        if (!br) return;
+        if (chat) chat.style.display = "none";
+        br.style.display = "flex";
+      }
+      function waCloseBrowser(nodeId) {
+        const chat = document.getElementById("wa-chat-layer-" + nodeId);
+        const br = document.getElementById("wa-browser-layer-" + nodeId);
+        if (br) br.style.display = "none";
+        if (chat) chat.style.display = "flex";
       }
 
       /* ── SMS ── */
@@ -9821,50 +10321,99 @@
           stripTags(n.data.subtitle) ||
           "Mensaje SMS.";
         const sender = stripTags(n.data.senderId) || "VIVETERPEL";
-        const subtitle = stripTags(n.data.subtitle) || "";
         const time = n.data.time || "";
+        const timeStr = time.replace(/^D\d+\s+/, "") || "Hoy";
         const linkMatch = msg.match(/(https?:\/\/[^\s]+)/);
         const linkUrl = linkMatch ? linkMatch[1] : "";
         const msgDisplay = msg.replace(
           /(https?:\/\/[^\s]+)/g,
-          `<a href="#" style="color:#007AFF;text-decoration:none">$1</a>`,
+          `<span style="color:#007AFF;text-decoration:underline;cursor:pointer" onclick="smsOpenBrowser('${n.id}')">$1</span>`,
         );
+        const imgSrc =
+          (_pmBenefitImages && _pmBenefitImages[n.id]) ||
+          (n.data && n.data.benefitImage) ||
+          "";
+        // El enlace/imagen abre un "navegador" dentro del mismo teléfono.
+        const hasTarget = imgSrc || linkUrl;
+        const displayUrl = linkUrl || "viveterpel.com/beneficio";
+        // Tarjeta de enlace (si hay URL) — clic abre el navegador in-app.
+        const linkCard =
+          linkUrl || imgSrc
+            ? `<div class="smsm-link-card" ${hasTarget ? `onclick="smsOpenBrowser('${n.id}')"` : ""}>
+                 <span style="font-size:15px">🔗</span>
+                 <div style="min-width:0">
+                   <div style="font-size:10px;font-weight:700;color:#1d4ed8">Ver más</div>
+                   <div style="font-size:9px;color:#3b82f6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px">${displayUrl}</div>
+                 </div>
+               </div>`
+            : "";
+        // Contenido del navegador: la imagen cargada o un placeholder.
+        const browserContent = imgSrc
+          ? `<img src="${imgSrc}" class="smsm-browser-img" alt="Contenido del enlace">`
+          : `<div style="padding:30px 18px;text-align:center;color:#999;font-size:11px">
+               <div style="font-size:30px;margin-bottom:10px">🌐</div>
+               Aquí se mostrará el contenido del enlace.<br><br>
+               <span style="font-size:10px;color:#bbb">Carga una imagen del beneficio para previsualizar la página.</span>
+             </div>`;
+        // Capa del navegador (oculta por defecto) solo si hay algo que abrir.
+        const browserLayer = hasTarget
+          ? `
+        <div class="smsm-browser-layer" id="sms-browser-layer-${n.id}" style="display:none">
+          <div class="smsm-browser-bar">
+            <span class="smsm-browser-back" onclick="smsCloseBrowser('${n.id}')" title="Volver">‹</span>
+            <div class="smsm-browser-url">🔒 ${displayUrl}</div>
+            <span style="font-size:14px;color:#888">⋮</span>
+          </div>
+          <div class="smsm-browser-body">${browserContent}</div>
+        </div>`
+          : "";
         return `
-  <div style="max-width:300px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif">
-    <!-- Phone chrome -->
-    <div style="background:#1d2a3a;padding:6px 10px;display:flex;align-items:center;gap:5px;border-radius:12px 12px 0 0">
-      <div style="display:flex;gap:4px"><div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div><div style="width:8px;height:8px;border-radius:50%;background:#febc2e"></div><div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div></div>
-      <div style="flex:1;text-align:center;font-size:9px;color:rgba(255,255,255,0.5)">Mensajes</div>
-    </div>
-    <div class="sms-phone" style="border-radius:0 0 12px 12px;overflow:hidden">
-      <!-- Contact header -->
-      <div style="background:#f8f8f8;padding:8px 12px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;gap:8px">
-        <div style="width:32px;height:32px;border-radius:50%;background:#E8001D;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700">T</div>
-        <div>
-          <div style="font-size:12px;font-weight:700;color:#111">${sender}</div>
-          <div style="font-size:9px;color:#888">Empresa verificada</div>
+  <div class="smsm-wrap">
+    <div class="smsm-shell">
+      <div class="smsm-screen">
+        <!-- Capa: app de Mensajes -->
+        <div class="smsm-msg-layer" id="sms-msg-layer-${n.id}">
+          <div class="smsm-topbar">
+            <div class="smsm-avatar">T</div>
+            <div class="smsm-name">${sender}</div>
+            <div class="smsm-verified">✓ Empresa verificada</div>
+          </div>
+          <div class="smsm-body">
+            <div class="smsm-daystamp">${timeStr}</div>
+            <div class="smsm-bubble">
+              <div style="font-size:12px;color:#111;line-height:1.5">${msgDisplay}</div>
+              ${linkCard}
+              <div class="smsm-time">${timeStr} ✓ Enviado</div>
+            </div>
+          </div>
+          <div class="smsm-input">
+            <div class="smsm-input-field">Mensaje de texto</div>
+            <div class="smsm-send">↑</div>
+          </div>
         </div>
-      </div>
-      <div class="sms-bar" style="background:#f0f0f0;color:#555">📱 ${sender}</div>
-      <div style="padding:4px 12px;background:#f8f8f8;border-bottom:1px solid #eee;font-size:9px;color:#888;text-align:center">${time || "Hoy"}</div>
-      <div class="sms-body" style="background:#f9f9f9;padding:10px 12px">
-        <div class="sms-bubble" style="background:#fff;border:1px solid #e0e0e0;border-radius:14px 14px 14px 4px;padding:10px 12px;max-width:85%;box-shadow:0 1px 3px rgba(0,0,0,0.06)">
-          <div style="font-size:11px;color:#111;line-height:1.5">${msgDisplay}</div>
-          ${linkUrl ? `<div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:7px 10px;margin-top:7px;display:flex;align-items:center;gap:6px"><span style="font-size:14px">🔗</span><div><div style="font-size:10px;font-weight:700;color:#1d4ed8">Enlace</div><div style="font-size:9px;color:#3b82f6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px">${linkUrl}</div></div></div>` : ""}
-          <div style="font-size:9px;color:#999;text-align:right;margin-top:5px">${time || "Enviado"} ✓</div>
-        </div>
-      </div>
-      <!-- Input bar -->
-      <div style="background:#f0f0f0;padding:7px 10px;display:flex;align-items:center;gap:6px;border-top:1px solid #ddd">
-        <div style="flex:1;background:#fff;border-radius:18px;padding:6px 12px;font-size:11px;color:#999;border:1px solid #e0e0e0">Mensaje de texto</div>
-        <div style="width:28px;height:28px;border-radius:50%;background:#007AFF;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700">↑</div>
+        ${browserLayer}
       </div>
     </div>
   </div>
-  <div style="padding:10px 12px;background:#fff8e6;border-top:1px solid #fcd34d;margin-top:4px;border-radius:0 0 8px 8px;${stripTags(n.data.objective) ? "" : "display:none"}">
+  <div style="padding:10px 12px;background:#fff8e6;border-top:1px solid #fcd34d;margin-top:6px;border-radius:8px;${stripTags(n.data.objective) ? "" : "display:none"}">
     <div style="font-size:10px;color:#92400e;font-weight:700;text-transform:uppercase;margin-bottom:3px">Objetivo del SMS</div>
     <div style="font-size:11px;color:#444">${stripTags(n.data.objective)}</div>
   </div>`;
+      }
+
+      /* Navegar dentro del mismo teléfono SMS: abrir el "navegador". */
+      function smsOpenBrowser(nodeId) {
+        const msgL = document.getElementById("sms-msg-layer-" + nodeId);
+        const brL = document.getElementById("sms-browser-layer-" + nodeId);
+        if (!brL) return;
+        if (msgL) msgL.style.display = "none";
+        brL.style.display = "flex";
+      }
+      function smsCloseBrowser(nodeId) {
+        const msgL = document.getElementById("sms-msg-layer-" + nodeId);
+        const brL = document.getElementById("sms-browser-layer-" + nodeId);
+        if (brL) brL.style.display = "none";
+        if (msgL) msgL.style.display = "flex";
       }
 
       /* ── Notificación push (enhanced phone mockup) ── */

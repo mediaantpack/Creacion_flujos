@@ -6,7 +6,7 @@
   "journeys": [
     {
       "id": 1780329654356,
-      "title": "Campaña Activacion Clientes Reto 2",
+      "title": "Journey Campaña Activacion Clientes Reto 2",
       "state": {
         "nodes": [
           {
@@ -190,7 +190,7 @@
           {
             "id": 72,
             "type": "push",
-            "x": 1706.8164564617282,
+            "x": 1705.2333421825574,
             "y": 556.7913482283826,
             "data": {
               "title": "Vive Telpel App/Web",
@@ -278,7 +278,7 @@
             "x": 2099.9515119891375,
             "y": 683.8828597421291,
             "data": {
-              "title": "Push Logro Reto #1",
+              "title": "🤖 Push Logro Reto #1",
               "subtitle": "Felicidades has completado Reto 🏆#1\nya puedes reclamar tu Bono 🎁 o Puntos 🎯",
               "intentType": "🚀 Dashboard ",
               "_rich_subtitle": "Felicidades has completado Reto 🏆#1<br>ya puedes reclamar tu Bono 🎁 o Puntos 🎯",
@@ -877,7 +877,7 @@
             "x": 1459.2198046720641,
             "y": 145.1219512195122,
             "data": {
-              "title": "Push Logro Reto #1",
+              "title": "🤖 Push Logro Reto #2",
               "subtitle": "Felicidades has completado Reto 💎 #2\nya puedes reclamar tu Bono 🎁 o Puntos 🎯",
               "intentType": "🚀 Dashboard ",
               "_rich_subtitle": "Felicidades has completado Reto 💎 #2<br>ya puedes reclamar tu Bono 🎁 o Puntos 🎯",
@@ -3399,13 +3399,13 @@
         "nodeIdCounter": 157,
         "textBoxIdCounter": 2000,
         "scale": 0.6316663384047444,
-        "panX": -284.1412496550731,
-        "panY": 115.52578506987027,
-        "title": "Campaña Activacion Clientes Reto 2"
+        "panX": -591.1412496550731,
+        "panY": -233.47421493012973,
+        "title": "Journey Campaña Activacion Clientes Reto 2"
       }
     }
   ],
   "meta": {
-    "saved": "2026-06-02T00:07:04.908Z"
+    "saved": "2026-06-02T00:17:57.216Z"
   }
 }
